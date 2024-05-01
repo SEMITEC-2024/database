@@ -48,7 +48,7 @@ BEGIN
     SELECT JSON_ARRAYAGG(
         JSON_OBJECT('province_id', province_id, 'name', name)
     ) INTO cantons 
-    ROM province
+    FROM province
     WHERE country_id = var_country_id ;
     
     SELECT cantons;

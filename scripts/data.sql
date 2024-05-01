@@ -1,10 +1,11 @@
---Country 
+-- Country
 
 INSERT INTO country (name) VALUES ('Costa Rica');
+select * from district;
+select * from user_type;
+select * from institution;
 
------------------
-
---Provinces
+-- Provinces
 
 INSERT INTO province (country_id, name) VALUES (1, 'San José');
 INSERT INTO province (country_id, name) VALUES (1, 'Alajuela');
@@ -17,7 +18,7 @@ INSERT INTO province (country_id, name) VALUES (1, 'Limón');
 
 -----------
 
---Cantons
+-- Cantons
 
 INSERT INTO canton (province_id, name) VALUES (3, 'Alvarado');
 INSERT INTO canton (province_id, name) VALUES (3, 'Cartago');
@@ -28,11 +29,7 @@ INSERT INTO canton (province_id, name) VALUES (3, 'Oreamuno');
 INSERT INTO canton (province_id, name) VALUES (3, 'Paraíso');
 INSERT INTO canton (province_id, name) VALUES (3, 'Turrialba');
 
-
-_________
-
-
---Districts
+-- Districts
 
 INSERT INTO district (canton_id, name) VALUES (3, 'Carmen');
 INSERT INTO district (canton_id, name) VALUES (3, 'Corralillo');
@@ -45,7 +42,7 @@ INSERT INTO district (canton_id, name) VALUES (3, 'Quebradilla');
 
 ------------
 
---Instituciones
+-- Instituciones
 
 INSERT INTO institution (district_id, name) VALUES (1, 'Escuela Padre Peralta');
 INSERT INTO institution (district_id, name) VALUES (2, 'Escuela de los Angeles');
@@ -54,49 +51,46 @@ INSERT INTO institution (district_id, name) VALUES (4, 'Escuela de Quircot');
 INSERT INTO institution (district_id, name) VALUES (1, 'Escuela el Bosque');
 INSERT INTO institution (district_id, name) VALUES (3, 'Colegio San Luis Gonzaga');
 
-==========
 
---Tipos de usuario
+-- Tipos de usuario
 
 
-INSERT INTO user_type (name) VALUES ('Estudiante')
-INSERT INTO user_type (name) VALUES ('Tutor')
+INSERT INTO user_type (name) VALUES ('Estudiante');
+INSERT INTO user_type (name) VALUES ('Tutor');
 
 
 ----------------------------
 
 -- Estudiantes
-INSERT INTO user (user_type_id, institution_id, district_id, password, email, name)
+INSERT INTO user (user_type_id, institution_id, district_id, user_code, password, email, name, salt)
 VALUES 
-    (1, 1, 1, '1234', 'jose.perez@estudiantec.cr', 'José Pérez'),
-    (1, 2, 2, '1234', 'laura.gonzalez@estudiantec.cr', 'Laura González'),
-    (1, 3, 3, '1234', 'pedro.castro@estudiantec.cr', 'Pedro Castro'),
-    (1, 4, 4, '1234', 'maria.ramirez@estudiantec.cr', 'María Ramírez'),
-    (1, 5, 1, '1234', 'carlos.lopez@estudiantec.cr', 'Carlos López'),
-    (1, 1, 1, '1234', 'andrea.martinez@estudiantec.cr', 'Andrea Martínez'),
-    (1, 2, 2, '1234', 'juan.gomez@estudiantec.cr', 'Juan Gómez'),
-    (1, 3, 3, '1234', 'lucia.sanchez@estudiantec.cr', 'Lucía Sánchez'),
-    (1, 4, 4, '1234', 'sergio.hernandez@estudiantec.cr', 'Sergio Hernández'),
-    (1, 5, 1, '1234', 'daniela.ruiz@estudiantec.cr', 'Daniela Ruiz');
-
-
+    (1, 1, 1, 'adwf', '1234', 'jose.perez@estudiantec.cr', 'José Pérez', 'hola'),
+    (1, 2, 2,'as3d', '1234', 'laura.gonzalez@estudiantec.cr', 'Laura González', 'hola'),
+    (1, 3, 3,'asdf9', '1234', 'pedro.castro@estudiantec.cr', 'Pedro Castro', 'hola'),
+    (1, 4, 4,'asdf8', '1234', 'maria.ramirez@estudiantec.cr', 'María Ramírez', 'hola'),
+    (1, 5, 1,'asdpf6', '1234', 'carlos.lopez@estudiantec.cr', 'Carlos López', 'hola'),
+    (1, 1, 1,'asdf5', '1234', 'andrea.martinez@estudiantec.cr', 'Andrea Martínez', 'hola'),
+    (1, 2, 2,'asdf4', '1234', 'juan.gomez@estudiantec.cr', 'Juan Gómez', 'hola'),
+    (1, 3, 3,'asdf3', '1234', 'lucia.sanchez@estudiantec.cr', 'Lucía Sánchez', 'hola'),
+    (1, 4, 4,'asdf2', '1234', 'sergio.hernandez@estudiantec.cr', 'Sergio Hernández', 'hola'),
+    (1, 5, 1,'asdf1', '1234', 'daniela.ruiz@estudiantec.cr', 'Daniela Ruiz', 'hola');
 
 
 -- Tutores
-INSERT INTO user (user_type_id, institution_id, district_id, password, email, name)
+INSERT INTO user (user_type_id, institution_id, district_id, user_code, password, email, name, salt)
 VALUES 
-    (2, 1, 1, '1234', 'ana.gonzalez@estudiantec.cr', 'Ana González'),
-    (2, 2, 2, '1234', 'pedro.martinez@estudiantec.cr', 'Pedro Martínez'),
-    (2, 3, 3, '1234', 'luisa.ruiz@estudiantec.cr', 'Luisa Ruiz'),
-    (2, 4, 4, '1234', 'juan.gomez@estudiantec.cr', 'Juan Gómez'),
-    (2, 5, 1, '1234', 'maria.perez@estudiantec.cr', 'María Pérez');
+    (2, 1, 1,'asddwf',  '1234', 'ana.gonzalez@estudiantec.cr', 'Ana González', 'nonga'),
+    (2, 2, 2,'adwsf',  '1234', 'pedro.martinez@estudiantec.cr', 'Pedro Martínez', 'nonga'),
+    (2, 3, 3, 'addwf', '1234', 'luisa.ruiz@estudiantec.cr', 'Luisa Ruiz', 'nonga'),
+    (2, 4, 4,'adwfu',  '1234', 'juan.gomez@estudiantec.cr', 'Juan Gómez', 'nonga'),
+    (2, 5, 1,'adwqf',  '1234', 'maria.perez@estudiantec.cr', 'María Pérez', 'nonga');
 
 
 
 
 -----
 
---Level
+-- Level
 
 INSERT INTO level (name) VALUES
 ('Fácil'),
@@ -105,7 +99,7 @@ INSERT INTO level (name) VALUES
 
 ---------
 
---Lessons
+-- Lessons
 
 INSERT INTO lesson (level_id, words, iterations, min_time, min_mistakes, name, description) VALUES
 (1, 'hola mundo', 5, 60, 0, 'Saludos', 'Practica escribiendo saludos básicos.'),
@@ -118,7 +112,7 @@ INSERT INTO lesson (level_id, words, iterations, min_time, min_mistakes, name, d
 
 ------
 
---Lessons metrics
+-- Lessons metrics
 
 INSERT INTO lesson_metrics (lesson_id, student_user_id, time_taken, mistakes, accuracy_rate, pulsation_per_minute, is_complete) VALUES
 (1, 1, 60, 3, 95.0, 70, 1),
@@ -142,7 +136,7 @@ INSERT INTO lesson_metrics (lesson_id, student_user_id, time_taken, mistakes, ac
 
 -----
 
---group_class
+-- group_class
 
 INSERT INTO group_class (next_lesson_id, name, group_code)
 VALUES
@@ -156,7 +150,7 @@ VALUES
 
 ------
 
---group_date
+-- group_date
 
 INSERT INTO group_date (group_id, hour, day) VALUES
 (1, '09:00:00', 'Lunes'),
@@ -172,7 +166,7 @@ INSERT INTO group_date (group_id, hour, day) VALUES
 
 
 -----
---group_student
+-- group_student
 
 INSERT INTO group_student (group_id, student_user_id) VALUES
 (1, 1),
@@ -189,7 +183,7 @@ INSERT INTO group_student (group_id, student_user_id) VALUES
 
 -------------
 
---group_teacher
+-- group_teacher
 
 INSERT INTO group_teacher (group_id, teacher_user_id) VALUES
 (1, 12),
@@ -197,18 +191,3 @@ INSERT INTO group_teacher (group_id, teacher_user_id) VALUES
 (3, 14),
 (4, 15),
 (5, 11);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
