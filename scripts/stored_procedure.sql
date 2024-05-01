@@ -48,7 +48,7 @@ BEGIN
     SELECT JSON_ARRAYAGG(
         JSON_OBJECT('province_id', province_id, 'name', name)
     ) INTO cantons 
-    FROM province
+    ROM province
     WHERE country_id = var_country_id ;
     
     SELECT cantons;
@@ -365,9 +365,10 @@ CREATE PROCEDURE insert_user(
     IN p_user_type_id TINYINT UNSIGNED,
     IN p_institution_id INT UNSIGNED,
     IN p_district_id INT UNSIGNED,
-    IN p_password BINARY(40),
+    IN p_password BINARY(60),
     IN p_email VARCHAR(32),
-    IN p_name VARCHAR(32)
+    IN p_name VARCHAR(32),
+    IN p_salt BINARY(29)
 )
 BEGIN
     DECLARE v_user_code VARCHAR(16);
@@ -377,8 +378,8 @@ BEGIN
         SET v_user_code = CONCAT('USR', FLOOR(RAND() * 10000));
     END WHILE;
     
-    INSERT INTO user (user_type_id, institution_id, district_id, user_code, password, email, name)
-    VALUES (p_user_type_id, p_institution_id, p_district_id, v_user_code, p_password, p_email, p_name);
+    INSERT INTO user (user_type_id, institution_id, district_id, user_code, password, email, name, salt)
+    VALUES (p_user_type_id, p_institution_id, p_district_id, v_user_code, p_password, p_email, p_name, p_salt);
     
 END //
 
@@ -386,7 +387,7 @@ DELIMITER ;
 
 -- Pruebas
 
-CALL insert_user(1, 1, 1, '1234', 'monolo22@estudiantec.cr', 'Manolo Fenandez')
+CALL insert_user(1, 1, 1, '1234', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
  
 
 ------------
