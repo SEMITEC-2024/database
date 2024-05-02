@@ -116,6 +116,27 @@ END//
 DELIMITER ;
 
 
+-- get_group_teacher_info --Revisar
+-- Obtiene los grupos del tutor con su respectiva informacion de grupo mas general
+-- call get_group_teacher(11)
+
+DELIMITER //
+
+CREATE PROCEDURE get_group_teacher_info(IN teacher_id INT)
+BEGIN
+    SELECT g.group_id, g.name, l.name AS progress,
+           (SELECT COUNT(*) FROM group_student gs WHERE gs.group_id = g.group_id) AS total_students
+    FROM group_class g
+    INNER JOIN group_teacher gt ON g.group_id = gt.group_id
+    INNER JOIN user u ON gt.teacher_user_id = u.user_id
+    INNER JOIN lesson l ON l.lesson_id = g.next_lesson_id
+    WHERE u.user_id = teacher_id;
+END//
+
+
+DELIMITER ;
+
+
 --------------------
 -- get_students_group
 -- El siguiente procedimiento da todos los estudiantes de un grupo
@@ -183,26 +204,6 @@ DELIMITER ;
 -- '[{\"day\": \"Lunes\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}, {\"day\": \"Miercoles\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}]'
 
 ------
-
--- get_group_teacher_info --Revisar
--- Obtiene los grupos del tutor con su respectiva informacion de grupo mas general
--- call get_group_teacher(11)
-
-DELIMITER //
-
-CREATE PROCEDURE get_group_teacher(IN teacher_id INT)
-BEGIN
-    SELECT g.group_id, g.name, l.name AS progress,
-           (SELECT COUNT(*) FROM group_student gs WHERE gs.group_id = g.group_id) AS total_students
-    FROM group_class g
-    INNER JOIN group_teacher gt ON g.group_id = gt.group_id
-    INNER JOIN user u ON gt.teacher_user_id = u.user_id
-    INNER JOIN lesson l ON l.lesson_id = g.next_lesson_id
-    WHERE u.user_id = teacher_id;
-END//
-
-
-DELIMITER ;
 
 
 -- get_lessons
@@ -281,10 +282,10 @@ CREATE PROCEDURE insert_user(
     IN p_user_type_id TINYINT UNSIGNED,
     IN p_institution_id INT UNSIGNED,
     IN p_district_id INT UNSIGNED,
-    IN p_password BINARY(60),
+    IN p_password VARCHAR(60),
     IN p_email VARCHAR(32),
     IN p_name VARCHAR(32),
-    IN p_salt BINARY(29)
+    IN p_salt VARCHAR(29)
 )
 BEGIN
     DECLARE v_user_code VARCHAR(16);
@@ -303,7 +304,7 @@ DELIMITER ;
 
 -- Pruebas
 
--- CALL insert_user(1, 1, 1, '1234', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
+-- CALL insert_user(1, 1, 1,'$2a$10$IXBZIvaw/6rnayXcx6TobeWzpjlgTww6d/FPTJBg37jMEFgLjTx', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
  
 
 ------------
@@ -367,6 +368,27 @@ BEGIN
     
 END //
 DELIMITER ;
+
+-- get user types and passwor to be auth
+DELIMITER //
+CREATE PROCEDURE login(
+	IN p_email varchar(32)
+)
+BEGIN
+	SELECT
+		u.password
+        , u.salt
+        , t.name
+        , t.user_type_id
+    FROM user u
+    INNER JOIN user_type t
+		ON u.user_type_id = t.user_type_id
+	WHERE u.email = p_email;
+END //
+DELIMITER ;
+
+
+
 
 
 
