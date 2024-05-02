@@ -78,17 +78,21 @@ END//
 DELIMITER ;
 
 -- get_institution
--- Obtiene todas las intituciones registradas en el sistema sin importar el distrito
+-- Obtiene todas las intituciones de un pais
 -- call get_institution()
 
 DELIMITER //
 
-CREATE PROCEDURE get_institution()
+CREATE PROCEDURE get_institution(IN var_country_id TINYINT UNSIGNED)
 BEGIN
-    SELECT institution_id, name
-    FROM institution;
+    SELECT i.institution_id, i.name
+    FROM institution i
+    INNER JOIN district d ON i.district_id = d.district_id
+    INNER JOIN canton c ON d.canton_id = c.canton_id
+    INNER JOIN province p ON p.province_id = c.province_id
+    INNER JOIN country co ON p.country_id = co.country_id
+    WHERE co.country_id = var_country_id;
 END//
-
 
 DELIMITER ;
 
