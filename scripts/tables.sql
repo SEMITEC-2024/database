@@ -1,6 +1,6 @@
-DROP  SCHEMA IF EXISTS semitec_db;
-CREATE SCHEMA semitec_db;
-USE semitec_db;
+-- DROP  SCHEMA IF EXISTS semitec_db;
+-- CREATE SCHEMA semitec_db;
+-- USE semitec_db;
 
 CREATE TABLE user_type (
     user_type_id TINYINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,

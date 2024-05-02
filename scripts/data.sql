@@ -1,9 +1,9 @@
 -- Country
 
 INSERT INTO country (name) VALUES ('Costa Rica');
-select * from district;
-select * from user_type;
-select * from institution;
+-- select * from district;
+-- select * from user_type;
+-- select * from institution;
 
 -- Provinces
 

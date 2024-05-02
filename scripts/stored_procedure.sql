@@ -1,5 +1,3 @@
-
-
 -- get_user_type
 -- Obtiene todos los tipos de usuarios existentes
 
@@ -7,13 +5,10 @@ DELIMITER //
 
 CREATE PROCEDURE get_user_type()
 BEGIN
-    SELECT JSON_ARRAYAGG(
-               JSON_OBJECT('user_type_id', user_type_id, 'name', name)
-           )
-      INTO @json
-      FROM user_type;
-    SELECT @json;
-END //
+    SELECT user_type_id, name
+    FROM user_type;
+END//
+
 
 DELIMITER ;
 
@@ -25,13 +20,10 @@ DELIMITER //
 
 CREATE PROCEDURE get_country()
 BEGIN
-    SELECT JSON_ARRAYAGG(
-               JSON_OBJECT('country_id', country_id, 'name', name)
-           )
-      INTO @json
-      FROM country;
-    SELECT @json;
-END //
+    SELECT country_id, name
+    FROM country;
+END//
+
 
 DELIMITER ;
 
@@ -43,15 +35,9 @@ DELIMITER //
 
 CREATE PROCEDURE get_province(IN var_country_id TINYINT)
 BEGIN
-    DECLARE cantons JSON;
-    
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT('province_id', province_id, 'name', name)
-    ) INTO cantons 
+    SELECT province_id, name
     FROM province
-    WHERE country_id = var_country_id ;
-    
-    SELECT cantons;
+    WHERE country_id = var_country_id;
 END//
 
 DELIMITER ;
@@ -65,16 +51,11 @@ DELIMITER //
 
 CREATE PROCEDURE get_cantons(IN var_province_id TINYINT)
 BEGIN
-    DECLARE cantons JSON;
-    
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT('canton_id', canton_id, 'name', name)
-    ) INTO cantons 
+    SELECT canton_id, name
     FROM canton
-    WHERE province_id = var_province_id ;
-    
-    SELECT cantons;
+    WHERE province_id = var_province_id;
 END//
+
 
 DELIMITER ;
 
@@ -88,16 +69,11 @@ DELIMITER //
 
 CREATE PROCEDURE get_districts(IN var_canton_id TINYINT)
 BEGIN
-    DECLARE districts JSON;
-    
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT('district_id', district_id, 'name', name)
-    ) INTO districts 
+    SELECT district_id, name
     FROM district
-    WHERE canton_id = var_canton_id ;
-    
-    SELECT districts;
+    WHERE canton_id = var_canton_id;
 END//
+
 
 DELIMITER ;
 
@@ -109,13 +85,10 @@ DELIMITER //
 
 CREATE PROCEDURE get_institution()
 BEGIN
-    SELECT JSON_ARRAYAGG(
-               JSON_OBJECT('institution_id', institution_id, 'name', name)
-           )
-      INTO @json
-      FROM institution;
-    SELECT @json;
-END //
+    SELECT institution_id, name
+    FROM institution;
+END//
+
 
 DELIMITER ;
 
@@ -126,77 +99,50 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE get_group_teacher_json(IN teacher_id INT)
+CREATE PROCEDURE get_group_teacher(IN teacher_id INT)
 BEGIN
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'group_id', g.group_id,
-            'name', g.name,
-            'group_code', g.group_code
-        )
-    )
-    INTO @json_result
+    SELECT g.group_id, g.name, g.group_code
     FROM group_class g
     INNER JOIN group_teacher gt ON g.group_id = gt.group_id
     INNER JOIN user u ON gt.teacher_user_id = u.user_id
     WHERE u.user_id = teacher_id;
-    
-    SELECT @json_result AS json_result;
 END//
+
 
 DELIMITER ;
 
 
 --------------------
 -- get_students_group
---- El siguiente procedimiento da todos los estudiantes de un grupo
+-- El siguiente procedimiento da todos los estudiantes de un grupo
 -- call students_group(3) del 1 al 3
 
 DELIMITER //
 
 CREATE PROCEDURE students_group(IN group_id INT)
 BEGIN
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'stuent_id', u.user_id,
-            'name', u.name
-        )
-    )
-    INTO @json_result
+    SELECT u.user_id AS student_id, u.name
     FROM user u
     INNER JOIN group_student gs ON u.user_id = gs.student_user_id
-    WHERE group_id = gs.group_id;
-    
-    SELECT @json_result AS json_result;
+    WHERE gs.group_id = group_id;
 END//
+
 
 DELIMITER ;
 
 
 --------------------------------
 -- get_user
---- El siguiente procedimiento da la informacion completa del usario mediante su id
+-- El siguiente procedimiento da la informacion completa del usario mediante su id
 -- call get_user(3)
 
 DELIMITER //
 
 CREATE PROCEDURE get_user(IN user_id INT)
 BEGIN
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'name', u.name,
-             'user_type', ut.name, 
-	     'institution', i.name,
-             'district', d.name,
-             'user_code', u.user_code,
-             'district', d.name,
-             'canton', c.name,
-             'province', p.name,
-             'country', co.name,
-             'email', u.email
-        )
-    )
-    INTO @json_result
+    SELECT u.name, ut.name AS user_type, i.name AS institution, 
+           d.name AS district, u.user_code, c.name AS canton, 
+           p.name AS province, co.name AS country, u.email
     FROM user u
     INNER JOIN user_type ut ON u.user_type_id = ut.user_type_id
     INNER JOIN institution i ON u.institution_id = i.institution_id 
@@ -204,10 +150,9 @@ BEGIN
     INNER JOIN canton c ON d.canton_id = c.canton_id
     INNER JOIN province p ON c.province_id = p.province_id
     INNER JOIN country co ON p.country_id = co.country_id
-    WHERE user_id = u.user_id ;
-    
-    SELECT @json_result AS json_result;
+    WHERE u.user_id = user_id ;
 END//
+
 
 DELIMITER ;
 
@@ -220,29 +165,18 @@ DELIMITER //
 
 CREATE PROCEDURE get_group_info(IN group_id INT)
 BEGIN
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'group_id', gc.group_id,
-            'name', gc.name,
-            'group_code', gc.group_code,
-            'day', gd.day,
-            'hour', gd.hour,
-            'teacher', ut.name 
-        )
-    )
-    INTO @json_result
+    SELECT gc.group_id, gc.name AS group_name, gc.group_code, gd.day, gd.hour, ut.name AS teacher_name
     FROM group_class gc
     INNER JOIN group_date gd ON gc.group_id = gd.group_id
     INNER JOIN group_teacher gt ON gc.group_id = gt.group_id  
     INNER JOIN user ut ON gt.teacher_user_id = ut.user_id  
     WHERE gc.group_id = group_id;
-    
-    SELECT @json_result AS json_result;
 END//
+
 
 DELIMITER ;
 
-'[{\"day\": \"Lunes\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}, {\"day\": \"Miercoles\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}]'
+-- '[{\"day\": \"Lunes\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}, {\"day\": \"Miercoles\", \"hour\": \"09:00:00.000000\", \"name\": \"Grupo A\", \"teacher\": \"Ana González\", \"group_id\": 1, \"group_code\": \"GRPA001\"}]'
 
 ------
 
@@ -254,32 +188,19 @@ DELIMITER //
 
 CREATE PROCEDURE get_group_teacher(IN teacher_id INT)
 BEGIN
-    SELECT JSON_ARRAYAGG(
-        JSON_OBJECT(
-            'group_id', g.group_id,
-            'name', g.name,
-            'progress', l.name,
-            'total_students', (
-                SELECT COUNT(*)
-                FROM group_student gs
-                WHERE gs.group_id = g.group_id
-            )
-        )
-    )
-    INTO @json_result
+    SELECT g.group_id, g.name, l.name AS progress,
+           (SELECT COUNT(*) FROM group_student gs WHERE gs.group_id = g.group_id) AS total_students
     FROM group_class g
     INNER JOIN group_teacher gt ON g.group_id = gt.group_id
     INNER JOIN user u ON gt.teacher_user_id = u.user_id
     INNER JOIN lesson l ON l.lesson_id = g.next_lesson_id
     WHERE u.user_id = teacher_id;
-    
-    SELECT @json_result AS json_result;
 END//
+
 
 DELIMITER ;
 
-------
------------------------------------------------------PROBAR
+
 -- get_lessons
 -- Funcion que muestra el nombre de las lecciones
 
@@ -287,17 +208,10 @@ DELIMITER //
 
 CREATE PROCEDURE get_lessons()
 BEGIN
-    SELECT JSON_ARRAYAGG(
-               JSON_OBJECT('lesson_id', lesson_id, 'name', name)
-           )
-      INTO @json
-      FROM lesson;
-    SELECT @json;
-END //
+    SELECT lesson_id, name
+    FROM lesson;
+END;
 
-DELIMITER ;
-
------------
 -- get_lessons_details
 -- Funcion que muestra el nombre de las lecciones
 -- call get_lessons_details()
@@ -306,13 +220,10 @@ DELIMITER //
 
 CREATE PROCEDURE get_lessons_details()
 BEGIN
-    SELECT JSON_ARRAYAGG(
-               JSON_OBJECT('lesson_id', lesson_id, 'name', name, 'words', words, 'description', description)
-           )
-      INTO @json
-      FROM lesson;
-    SELECT @json;
-END //
+    SELECT lesson_id, name, words, description
+    FROM lesson;
+END;
+
 
 DELIMITER ;
 
@@ -329,7 +240,7 @@ DELIMITER //
 CREATE PROCEDURE insert_group_class(
     IN p_next_lesson_id TINYINT UNSIGNED,
     IN p_name VARCHAR(16),
-    OUT var_code JSON
+    OUT var_code VARCHAR(16)
 )
 BEGIN
     DECLARE v_group_code VARCHAR(16);
@@ -342,17 +253,18 @@ BEGIN
     INSERT INTO group_class (next_lesson_id, name, group_code)
     VALUES (p_next_lesson_id, p_name, v_group_code);
     
-    SET var_code = JSON_OBJECT('group_code', v_group_code);
+    SET var_code = v_group_code;
 END //
+
 
 DELIMITER ;
 
 -- Pruebas
 
-CALL insert_group_class(1, 'Grupo A1', @group_code);
-SELECT @group_code AS group_code;
+-- CALL insert_group_class(1, 'Grupo A1', @group_code);
+-- SELECT @group_code AS group_code;
 
-select * from group_class
+-- select * from group_class
 
 ----------------------
 
@@ -387,7 +299,7 @@ DELIMITER ;
 
 -- Pruebas
 
-CALL insert_user(1, 1, 1, '1234', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
+-- CALL insert_user(1, 1, 1, '1234', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
  
 
 ------------
@@ -415,6 +327,43 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- insert_student_group_code
+-- Este procedimiento inserta a un estudiante a un grupo por medio del user_code del estudiante
+
+DELIMITER //
+CREATE PROCEDURE insert_student_group_code(
+    IN var_group_id MEDIUMINT UNSIGNED,
+    IN var_user_code VARCHAR(16)
+)
+BEGIN
+    DECLARE var_user_id INT;
+    
+    SELECT user_id INTO var_user_id 
+    FROM user u
+    WHERE u.user_code = var_user_code;
+    
+    INSERT INTO group_student (group_id, user_id)
+    VALUES (var_group_id, var_user_id);
+    
+END //
+DELIMITER ;
+
+
+-- delete_student_from_group
+-- Procedimiento que elimina a un estudiante de un grupo
+DELIMITER //
+CREATE PROCEDURE delete_student_from_group(
+    IN var_user_id INT
+)
+BEGIN
+
+    DELETE FROM group_student 
+    WHERE user_id = var_user_id;
+    
+END //
+DELIMITER ;
+
 
 
 
