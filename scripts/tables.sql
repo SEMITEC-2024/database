@@ -1,6 +1,6 @@
--- DROP  SCHEMA IF EXISTS semitec_db;
--- CREATE SCHEMA semitec_db;
--- USE semitec_db;
+DROP  SCHEMA IF EXISTS semitec_db;
+CREATE SCHEMA semitec_db;
+USE semitec_db;
 
 CREATE TABLE user_type (
     user_type_id TINYINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
@@ -61,10 +61,10 @@ CREATE TABLE user(
     institution_id INT UNSIGNED NOT NULL ,
     district_id INT UNSIGNED NOT NULL ,
     user_code VARCHAR(16) NOT NULL UNIQUE,
-    password BINARY(40) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     email VARCHAR(32) NOT NULL,
     name VARCHAR(32) NOT NULL,
-    salt BINARY(29) NOT NULL,
+    salt VARCHAR(29) NOT NULL,
     FOREIGN KEY (user_type_id) REFERENCES user_type(user_type_id),
     FOREIGN KEY (institution_id) REFERENCES institution(institution_id),
     FOREIGN KEY (district_id) REFERENCES district(district_id) 
