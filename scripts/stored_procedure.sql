@@ -339,11 +339,11 @@ CREATE PROCEDURE insert_student_group_code(
 BEGIN
     DECLARE var_user_id INT;
     
-    SELECT user_id INTO var_user_id 
+    SELECT u.user_id INTO var_user_id 
     FROM user u
     WHERE u.user_code = var_user_code;
     
-    INSERT INTO group_student (group_id, user_id)
+    INSERT INTO group_student (group_id, student_user_id)
     VALUES (var_group_id, var_user_id);
     
 END //
@@ -359,7 +359,7 @@ CREATE PROCEDURE delete_student_from_group(
 BEGIN
 
     DELETE FROM group_student 
-    WHERE user_id = var_user_id;
+    WHERE student_user_id = var_user_id;
     
 END //
 DELIMITER ;
