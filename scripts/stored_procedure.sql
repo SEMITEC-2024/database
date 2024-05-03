@@ -377,16 +377,16 @@ CREATE PROCEDURE login(
 BEGIN
 	SELECT
 		u.password
-        , u.salt
-        , t.name
-        , t.user_type_id
+        , u.user_id
+		, t.user_type_id
+        , u.name as username
+        , t.name as user_type_name
     FROM user u
     INNER JOIN user_type t
 		ON u.user_type_id = t.user_type_id
 	WHERE u.email = p_email;
 END //
 DELIMITER ;
-
 
 
 
