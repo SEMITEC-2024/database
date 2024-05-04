@@ -170,24 +170,32 @@ DELIMITER ;
 
 DELIMITER //
 
--- get_lessons
--- Funcion que muestra el nombre de las lecciones
-CREATE PROCEDURE get_lessons()
+-- Retorna el detalle de la leccion on id p_lesson_id
+CREATE PROCEDURE get_lesson(IN p_lesson_id tinyint)
 BEGIN
-    SELECT lesson_id, name
-    FROM lesson;
+    SELECT
+		lesson_id
+        , words
+        , iterations
+        , min_time
+        , min_mistakes
+    FROM lesson
+    WHERE lesson_id = p_lesson_id;
 END//
 
 DELIMITER;
 
 DELIMITER //
 
--- get_lessons_details
--- Funcion que muestra el nombre de las lecciones
+-- Obtiene la lista de todas las lecciones
 -- call get_lessons_details()
-CREATE PROCEDURE get_lessons_details()
+CREATE PROCEDURE get_lessons()
 BEGIN
-    SELECT lesson_id, name, words, description
+    SELECT
+		lesson_id
+        , name
+        , words
+        , description
     FROM lesson;
 END//
 DELIMITER ;
