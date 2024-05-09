@@ -152,24 +152,24 @@ INSERT INTO level (name) VALUES
 -- Lessons
 
 INSERT INTO lesson (level_id, words, iterations, min_time, min_mistakes, name, description) VALUES
-(1, 'fasa', 39, 420, 5, 'Fasa Lección', 'En esta lección de mecanografía, practicarás la palabra "fasa" para mejorar tu velocidad y precisión en la escritura.'),
-(1, 'tuyo', 50, 420, 5, 'Tuyo Lección', 'Esta lección de mecanografía se enfoca en la palabra "tuyo", permitiéndote fortalecer tu habilidad de escritura.'),
-(1, 'daña', 39, 420, 5, 'Daña Lección', 'Practica la palabra "daña" en esta lección de mecanografía para mejorar tu destreza en el teclado.'),
-(1, 'awertr ñoiuyu ', 20, 420, 5, 'Awertr Lección', 'Mejora tu velocidad y precisión escribiendo la palabra "awertr ñoiuyu " en esta lección de mecanografía.'),
-(1, 'peri', 39, 420, 5, 'Peri Lección', 'En esta lección de mecanografía, explorarás diferentes usos de la palabra "peri" para perfeccionar tu habilidad en el teclado.'),
-(1, 'pito', 39, 420, 5, 'Pito Lección', 'Fortalece tu destreza en mecanografía practicando la palabra "pito" en esta lección.'),
-(1, 'safa', 39, 420, 5, 'Safa Lección', 'Practica la palabra "safa" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(1, 'rewa uioñ', 30, 420, 5, 'Rewa Lección', 'Esta lección de mecanografía se enfoca en la palabra "rewa uioñ", ayudándote a aumentar tu velocidad de escritura.'),
-(1, 'trio', 39, 420, 5, 'Trio Lección', 'Descubre las diferentes aplicaciones de la palabra "trio" en esta lección de mecanografía, mejorando tu habilidad en el teclado.'),
-(1, 'jalada', 36, 420, 5, 'Jalada Lección', 'Mejora tu habilidad en mecanografía escribiendo la palabra "jalada" en esta lección diseñada para aumentar tu velocidad.'),
-(1, 'gadasa', 40, 420, 5, 'Gadasa Lección', 'En esta lección de mecanografía, practicarás la palabra "gadasa" para perfeccionar tu técnica en el teclado.'),
-(1, 'alkaja', 45, 420, 5, 'Alkaja Lección', 'Fortalece tu destreza en mecanografía practicando la palabra "alkaja" en esta lección diseñada para mejorar tu velocidad y precisión.'),
-(1, 'asdfgf ñlkjhj ', 20, 420, 5, 'Asdfgf Lección', 'En esta lección de mecanografía, explorarás la palabra "asdfgf ñlkjhj " para mejorar tu velocidad y precisión en la escritura.'),
-(1, 'sala', 39, 420, 5, 'Sala Lección', 'Practica la palabra "sala" en esta lección de mecanografía para fortalecer tu habilidad en el teclado.'),
-(1, 'dala', 39, 420, 5, 'Dala Lección', 'Mejora tu habilidad en mecanografía escribiendo la palabra "dala" en esta lección diseñada para aumentar tu velocidad.'),
-(1, 'kalaña', 45, 420, 5, 'Kalaña Lección', 'En esta lección de mecanografía, explorarás diferentes usos de la palabra "kalaña" para mejorar tu destreza en el teclado.'),
-(1, 'fgfdsa jklñ', 20, 420, 5, 'Jklñ Lección', 'Descubre las diferentes aplicaciones de la palabra "jklñ" en esta lección de mecanografía, fortaleciendo tu habilidad en el teclado.'),
-(1, 'saña', 39, 420, 5, 'Saña Lección', 'Practica la palabra "saña" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.');
+(1, 'fasa', 39, 420, 5, 'Lección 1', 'En esta lección de mecanografía, practicarás la palabra "fasa" para mejorar tu velocidad y precisión en la escritura.'),
+(1, 'tuyo', 50, 420, 5, 'Lección 2', 'Esta lección de mecanografía se enfoca en la palabra "tuyo", permitiéndote fortalecer tu habilidad de escritura.'),
+(1, 'daña', 39, 420, 5, 'Lección 3', 'Practica la palabra "daña" en esta lección de mecanografía para mejorar tu destreza en el teclado.'),
+(1, 'awertr ñoiuyu ', 20, 420, 5, 'Lección 4', 'Mejora tu velocidad y precisión escribiendo la palabra "awertr ñoiuyu " en esta lección de mecanografía.'),
+(1, 'peri', 39, 420, 5, 'Lección 5', 'En esta lección de mecanografía, explorarás diferentes usos de la palabra "peri" para perfeccionar tu habilidad en el teclado.'),
+(1, 'pito', 39, 420, 5, 'Lección 6', 'Fortalece tu destreza en mecanografía practicando la palabra "pito" en esta lección.'),
+(1, 'safa', 39, 420, 5, 'Lección 7', 'Practica la palabra "safa" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
+(1, 'rewa uioñ', 30, 420, 5, 'Lección 8', 'Esta lección de mecanografía se enfoca en la palabra "rewa uioñ", ayudándote a aumentar tu velocidad de escritura.'),
+(1, 'trio', 39, 420, 5, 'Lección 9', 'Descubre las diferentes aplicaciones de la palabra "trio" en esta lección de mecanografía, mejorando tu habilidad en el teclado.'),
+(1, 'jalada', 36, 420, 5, 'Lección 10', 'Mejora tu habilidad en mecanografía escribiendo la palabra "jalada" en esta lección diseñada para aumentar tu velocidad.'),
+(1, 'gadasa', 40, 420, 5, 'Lección 11', 'En esta lección de mecanografía, practicarás la palabra "gadasa" para perfeccionar tu técnica en el teclado.'),
+(1, 'alkaja', 45, 420, 5, 'Lección 12', 'Fortalece tu destreza en mecanografía practicando la palabra "alkaja" en esta lección diseñada para mejorar tu velocidad y precisión.'),
+(1, 'asdfgf ñlkjhj ', 20, 420, 5, 'Lección 13', 'En esta lección de mecanografía, explorarás la palabra "asdfgf ñlkjhj " para mejorar tu velocidad y precisión en la escritura.'),
+(1, 'sala', 39, 420, 5, 'Lección 14', 'Practica la palabra "sala" en esta lección de mecanografía para fortalecer tu habilidad en el teclado.'),
+(1, 'dala', 39, 420, 5, 'Lección 15', 'Mejora tu habilidad en mecanografía escribiendo la palabra "dala" en esta lección diseñada para aumentar tu velocidad.'),
+(1, 'kalaña', 45, 420, 5, 'Lección 16', 'En esta lección de mecanografía, explorarás diferentes usos de la palabra "kalaña" para mejorar tu destreza en el teclado.'),
+(1, 'fgfdsa jklñ', 20, 420, 5, 'Lección 17', 'Descubre las diferentes aplicaciones de la palabra "jklñ" en esta lección de mecanografía, fortaleciendo tu habilidad en el teclado.'),
+(1, 'saña', 39, 420, 5, 'Lección 18', 'Practica la palabra "saña" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.');
 
 -- Lessons metrics
 
