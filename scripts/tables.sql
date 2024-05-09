@@ -69,9 +69,10 @@ CREATE TABLE lesson(
     min_time SMALLINT NOT NULL,
     min_mistakes SMALLINT(1) NOT NULL,
     name VARCHAR(16) NOT NULL,
-    description VARCHAR(128),
+    description TEXT,
     FOREIGN KEY (level_id) REFERENCES level(level_id)
 );
+
 
 CREATE TABLE lesson_metrics(
     lesson_metrics_id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
