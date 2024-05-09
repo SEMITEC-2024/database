@@ -174,7 +174,7 @@ DELIMITER //
 -- call get_group_info(1)
 CREATE PROCEDURE get_group_info_by_student(IN var_user_id INT)
 BEGIN
-    SELECT gc.group_id, gc.name AS group_name, gc.group_code, gd.day, gd.hour, ut.name AS teacher_name
+    SELECT gc.group_id, gc.name AS group_name, gc.group_code, gd.day, DATE_FORMAT(gd.hour,'%H:%i'), ut.name AS teacher_name
     FROM group_class gc
     INNER JOIN group_date gd ON gc.group_id = gd.group_id
     INNER JOIN group_student gs ON gc.group_id = gs.group_id 
