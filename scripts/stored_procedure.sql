@@ -169,6 +169,23 @@ END//
 DELIMITER ;
 
 DELIMITER //
+-- get_group_info
+-- El siguiente metodo muestra la infomacion de los grupos, el nombre, fecha y hora, el profesor a cargo segun el id del estudiante
+-- call get_group_info(1)
+CREATE PROCEDURE get_group_info_by_student(IN var_user_id INT)
+BEGIN
+    SELECT gc.group_id, gc.name AS group_name, gc.group_code, gd.day, gd.hour, ut.name AS teacher_name
+    FROM group_class gc
+    INNER JOIN group_date gd ON gc.group_id = gd.group_id
+    INNER JOIN group_student gs ON gc.group_id = gs.group_id 
+    INNER JOIN group_teacher gt ON gc.group_id = gt.group_id  
+    INNER JOIN user ut ON gt.teacher_user_id = ut.user_id  
+    WHERE gs.student_user_id = var_user_id;
+END//
+
+DELIMITER ;
+
+DELIMITER //
 
 -- Retorna el detalle de la leccion on id p_lesson_id
 CREATE PROCEDURE get_lesson(IN p_lesson_id tinyint)
