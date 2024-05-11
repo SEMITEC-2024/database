@@ -170,9 +170,9 @@ INSERT INTO lesson (level_id, words, iterations, min_time, min_mistakes, name, d
 (2, 'fal fal fal aña aña aña', 3, 420, 5, 'Lección 16', 'En esta lección de mecanografía, explorarás diferentes combinaciones de letras "fal fal fal aña aña aña" para mejorar tu destreza en el teclado.'),
 (2, 'saña saña', 3, 420, 5, 'Lección 17', 'Descubre las diferentes combinaciones de letras "saña saña" en esta lección de mecanografía, fortaleciendo tu habilidad en el teclado.'),
 (3, 'falda falda', 3, 420, 5, 'Lección 18', 'Practica la secuencia "falda falda" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'falda falda', 3, 420, 5, 'Lección 19', 'Practica la secuencia "falda falda" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'salsa salda', 3, 420, 5, 'Lección 20', 'Practica la secuencia "salsa salda" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'dasa dasa', 3, 420, 5, 'Lección 21', 'Practica la secuencia "dasa dasa" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.');
+(3, 'falda falda jaka jaka', 3, 420, 5, 'Lección 19', 'Practica la secuencia "falda falda jaka jaka" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
+(3, 'salda salda salsa salsa', 3, 420, 5, 'Lección 20', 'Practica la secuencia "salsa salda salsa salsa" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
+(3, 'dasa dasa sada sada', 3, 420, 5, 'Lección 21', 'Practica la secuencia "dasa dasa sada sada" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.');
 
 
 -- Lessons metrics
