@@ -204,6 +204,24 @@ DELIMITER;
 
 DELIMITER //
 
+-- Retorna las metricas de un estudiante con el id
+CREATE PROCEDURE get_lesson_metrics_student(IN p_student_id tinyint)
+BEGIN
+    SELECT
+		lesson_id
+        , time_taken
+        , mistakes
+        , accuracy_rate
+        , pulsation_per_minute
+        , is_complete
+    FROM lesson_metrics 
+    WHERE student_user_id = p_student_id;
+END//
+
+DELIMITER;
+
+DELIMITER //
+
 -- Obtiene la lista de todas las lecciones
 -- call get_lessons_details()
 CREATE PROCEDURE get_lessons()
@@ -352,4 +370,26 @@ BEGIN
 	WHERE u.email = p_email;
 END //
 
+DELIMITER ;
+
+DELIMITER //
+
+-- insert_student_metrics
+-- Este procedimiento inserta las metricas de cada clase de un estudiante
+-- Prueba CALL insert_student_metrics(3, 1, 120, 5, 0.85, 70, 1);
+CREATE PROCEDURE insert_student_metrics(
+    IN p_lesson_id TINYINT  UNSIGNED,
+    IN p_student_user_id INT UNSIGNED,
+    IN p_time_taken SMALLINT,
+    IN p_mistakes SMALLINT,
+    IN p_accuracy_rate FLOAT,
+    IN p_pulsation_per_minute SMALLINT,
+    IN p_is_complete BIT
+)
+BEGIN
+    
+    INSERT INTO lesson_metrics (lesson_id , student_user_id ,time_taken, mistakes,accuracy_rate, pulsation_per_minute,is_complete)
+    VALUES (p_lesson_id, p_student_user_id, p_time_taken, p_mistakes, p_accuracy_rate, p_pulsation_per_minute, p_is_complete);
+    
+END //
 DELIMITER ;
