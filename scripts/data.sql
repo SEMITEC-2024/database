@@ -240,3 +240,4 @@ INSERT INTO group_teacher (group_id, teacher_user_id) VALUES
 (3, 14),
 (4, 15),
 (5, 11);
+

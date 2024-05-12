@@ -153,7 +153,7 @@ END//
 DELIMITER ;
 
 DELIMITER //
--- get_group_info --REVISAR
+-- get_group_info 
 -- El siguiente metodo muestra la infomacion de los grupos, el nombre, fecha y hora, el profesor a cargo
 -- call get_group_info(1)
 CREATE PROCEDURE get_group_info(IN group_id INT)
@@ -244,12 +244,13 @@ DELIMITER //
 CREATE PROCEDURE insert_group_class(
     IN p_next_lesson_id TINYINT UNSIGNED,
     IN p_name VARCHAR(16),
-    OUT var_code VARCHAR(16)
+    IN p_teacher_user_id INT UNSIGNED
 )
 BEGIN
     DECLARE v_group_code VARCHAR(16);
-    SET v_group_code = CONCAT('GR', FLOOR(RAND() * 10000));
+    DECLARE var_group_id MEDIUMINT;
     
+    SET v_group_code = CONCAT('GR', FLOOR(RAND() * 10000));
     WHILE EXISTS (SELECT 1 FROM group_class WHERE group_code = v_group_code) DO
         SET v_group_code = CONCAT('GR', FLOOR(RAND() * 10000));
     END WHILE;
@@ -257,7 +258,12 @@ BEGIN
     INSERT INTO group_class (next_lesson_id, name, group_code)
     VALUES (p_next_lesson_id, p_name, v_group_code);
     
-    SET var_code = v_group_code;
+    SET var_group_id = LAST_INSERT_ID();
+    
+    INSERT INTO group_teacher (group_id, teacher_user_id)
+    VALUES (var_group_id, p_teacher_user_id);
+    
+    SELECT var_group_id AS group_id,v_group_code AS group_code;
 END //
 
 DELIMITER ;
@@ -266,7 +272,7 @@ DELIMITER //
 
 -- insert_user
 -- Procedimiento que inserta en la base de datos un usuario nuevo
--- CALL insert_user(1, 1, 1,'$2a$10$IXBZIvaw/6rnayXcx6TobeWzpjlgTww6d/FPTJBg37jMEFgLjTx', 'monolo22@estudiantec.cr', 'Manolo Fenandez', 'asdf')
+-- CALL insert_user(2, 1, 1,'$2a$10$IXBZIvaw/6rnayXcx6TobeWzpjlgTww6d/FPTJBg37jMEFgLjTx', 'monolo22@estudiantec.cr', 'Manolin Fenandez', 'asdf')
 CREATE PROCEDURE insert_user(
     IN p_user_type_id TINYINT UNSIGNED,
     IN p_institution_id INT UNSIGNED,
