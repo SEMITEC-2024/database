@@ -212,14 +212,9 @@ VALUES
 
 INSERT INTO group_date (group_id, hour, day) VALUES
 (1, '09:00:00', 'Lunes'),
-(1, '09:00:00', 'Miércoles'),
 (2, '10:30:00', 'Martes'),
-(2, '10:30:00', 'Jueves'),
 (3, '12:00:00', 'Miércoles'),
-(3, '12:00:00', 'Viernes'),
 (4, '13:30:00', 'Jueves'),
-(4, '13:30:00', 'Sábado'),
-(5, '15:00:00', 'Viernes'),
 (5, '15:00:00', 'Domingo');
 
 -- group_student
