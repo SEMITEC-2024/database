@@ -104,7 +104,7 @@ DELIMITER //
 -- call get_group_teacher(11)
 CREATE PROCEDURE get_group_teacher_info(IN teacher_id INT)
 BEGIN
-    SELECT g.group_id, g.name, l.name AS progress,
+    SELECT g.group_id, g.name, l.name AS progress, g.group_code,
            (SELECT COUNT(*) FROM group_student gs WHERE gs.group_id = g.group_id) AS total_students
     FROM group_class g
     INNER JOIN group_teacher gt ON g.group_id = gt.group_id
