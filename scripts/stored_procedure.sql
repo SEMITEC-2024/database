@@ -101,7 +101,7 @@ DELIMITER //
 
 -- get_group_teacher_info
 -- Obtiene los grupos del tutor con su respectiva informacion de grupo mas general
--- call get_group_teacher(11)
+-- 
 CREATE PROCEDURE get_group_teacher_info(IN teacher_id INT)
 BEGIN
     SELECT g.group_id, g.name, l.name AS progress, g.group_code,
@@ -396,6 +396,26 @@ BEGIN
     
     INSERT INTO lesson_metrics (lesson_id , student_user_id ,time_taken, mistakes,accuracy_rate, pulsation_per_minute,is_complete)
     VALUES (p_lesson_id, p_student_user_id, p_time_taken, p_mistakes, p_accuracy_rate, p_pulsation_per_minute, p_is_complete);
+    
+END //
+DELIMITER ;
+
+DELIMITER //
+-- insert_student_student_code
+-- Este procedimiento inserta a un estudiante a un grupo por medio del group_code del grupo
+CREATE PROCEDURE insert_student_student_code(
+    IN var_group_code VARCHAR(16) ,
+    IN var_user_id INT UNSIGNED
+)
+BEGIN
+    DECLARE var_group_id INT;
+    
+    SELECT g.group_id INTO var_group_id 
+    FROM group_class g
+    WHERE g.group_code = var_group_code;
+    
+    INSERT INTO group_student (group_id, student_user_id)
+    VALUES (var_group_id, var_user_id);
     
 END //
 DELIMITER ;
