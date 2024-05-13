@@ -401,9 +401,9 @@ END //
 DELIMITER ;
 
 DELIMITER //
--- insert_student_student_code
+-- join_group_by_student_code
 -- Este procedimiento inserta a un estudiante a un grupo por medio del group_code del grupo
-CREATE PROCEDURE insert_student_student_code(
+CREATE PROCEDURE join_group_by_student_code(
     IN var_group_code VARCHAR(16) ,
     IN var_user_id INT UNSIGNED
 )
