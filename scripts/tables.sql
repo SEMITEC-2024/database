@@ -64,8 +64,7 @@ CREATE TABLE level(
 CREATE TABLE lesson(
     lesson_id TINYINT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
     level_id TINYINT UNSIGNED NOT NULL,
-    words VARCHAR(64) NOT NULL,
-    iterations TINYINT NOT NULL,
+    words TEXT NOT NULL,
     min_time SMALLINT NOT NULL,
     min_mistakes SMALLINT(1) NOT NULL,
     name VARCHAR(16) NOT NULL,
@@ -73,14 +72,14 @@ CREATE TABLE lesson(
     FOREIGN KEY (level_id) REFERENCES level(level_id)
 );
 
-
+-- numeric(4,1) cambiar el tipo de accuracy
 CREATE TABLE lesson_metrics(
     lesson_metrics_id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
     lesson_id TINYINT UNSIGNED NOT NULL,
     student_user_id INT UNSIGNED NOT NULL,
     time_taken SMALLINT NOT NULL,
     mistakes SMALLINT NOT NULL,
-    accuracy_rate FLOAT NOT NULL,
+    accuracy_rate FLOAT NOT NULL, 
     pulsation_per_minute SMALLINT(1) NOT NULL,
     is_complete BIT,
     FOREIGN KEY (lesson_id) REFERENCES lesson(lesson_id)

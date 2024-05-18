@@ -255,7 +255,9 @@ DELIMITER //
 CREATE PROCEDURE insert_group_class(
     IN p_next_lesson_id TINYINT UNSIGNED,
     IN p_name VARCHAR(16),
-    IN p_teacher_user_id INT UNSIGNED
+    IN p_teacher_user_id INT UNSIGNED,
+    IN p_day ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"),
+    IN p_hour TIME
 )
 BEGIN
     DECLARE v_group_code VARCHAR(16);
@@ -273,6 +275,9 @@ BEGIN
     
     INSERT INTO group_teacher (group_id, teacher_user_id)
     VALUES (var_group_id, p_teacher_user_id);
+    
+    INSERT INTO group_date (group_id, hour, day)
+    VALUES(var_group_id,p_hour,p_day);
     
     SELECT var_group_id AS group_id,v_group_code AS group_code;
 END //
@@ -430,3 +435,48 @@ BEGIN
     
 END //
 DELIMITER ;
+
+DELIMITER //
+-- create_lesson
+-- Procedimineto que agrega nuevas lecciones 
+CREATE PROCEDURE create_lesson(
+    IN var_level_id VARCHAR(16) ,
+    IN var_words TEXT ,
+    IN var_min_time SMALLINT,
+    IN var_min_mistakes SMALLINT,
+    IN var_name VARCHAR(16),
+    IN var_description TEXT
+)
+BEGIN
+	INSERT INTO lesson(level_id ,words, min_time, min_mistakes, name, description)
+    VALUES(var_level_id, var_words, var_min_time, var_min_mistakes ,var_name, var_description);
+
+END //
+DELIMITER ;
+
+DELIMITER //
+-- get_level
+-- Obtiene todos los niveles
+CREATE PROCEDURE get_level()
+BEGIN
+    SELECT level_id, name
+    FROM level;
+END//
+
+DELIMITER ;
+
+DELIMITER //
+-- insert_lesson_date
+-- Este procedimiento inserta una nueva fecha para un grupo
+CREATE PROCEDURE insert_lesson_date(
+    IN p_group_id TINYINT  UNSIGNED,
+    IN p_hour TIME,
+    IN p_day ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo")
+)
+BEGIN
+    INSERT INTO group_date (group_id , hour, day)
+    VALUES (p_group_id, p_hour, p_day);
+END //
+DELIMITER ;
+
+
