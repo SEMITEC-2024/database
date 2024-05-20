@@ -440,7 +440,7 @@ DELIMITER //
 -- create_lesson
 -- Procedimineto que agrega nuevas lecciones 
 CREATE PROCEDURE create_lesson(
-    IN var_level_id VARCHAR(16) ,
+    IN var_level_id INT ,
     IN var_words TEXT ,
     IN var_min_time SMALLINT,
     IN var_min_mistakes SMALLINT,
@@ -469,7 +469,7 @@ DELIMITER //
 -- insert_lesson_date
 -- Este procedimiento inserta una nueva fecha para un grupo
 CREATE PROCEDURE insert_lesson_date(
-    IN p_group_id TINYINT  UNSIGNED,
+    IN p_group_id MEDIUMINT UNSIGNED,
     IN p_hour TIME,
     IN p_day ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo")
 )
