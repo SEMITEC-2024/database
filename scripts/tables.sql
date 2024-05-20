@@ -79,7 +79,7 @@ CREATE TABLE lesson_metrics(
     student_user_id INT UNSIGNED NOT NULL,
     time_taken SMALLINT NOT NULL,
     mistakes SMALLINT NOT NULL,
-    accuracy_rate FLOAT NOT NULL, 
+    accuracy_rate FLOAT(4,1) NOT NULL, 
     pulsation_per_minute SMALLINT(1) NOT NULL,
     is_complete BIT,
     FOREIGN KEY (lesson_id) REFERENCES lesson(lesson_id)

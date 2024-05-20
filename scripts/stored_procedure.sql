@@ -479,4 +479,48 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+-- get_lessons_count_by_student
+-- obtiene el numero de lecciones realizadas por  estudiante
+CREATE PROCEDURE get_lessons_count_by_student(
+    IN p_student_id INT  UNSIGNED
+)
+BEGIN
+    SELECT COUNT(*) AS complete_lessons
+	FROM lesson_metrics
+	WHERE student_user_id = p_student_id AND is_complete = 1;
+
+END //
+DELIMITER ;
+
+DELIMITER //
+-- get_lessons_count
+-- obtiene el numero de lecciones realizadas por  estudiante
+CREATE PROCEDURE get_lessons_count()
+BEGIN
+    SELECT COUNT(*) AS lessons FROM lesson;
+END //
+DELIMITER ;
+
+DELIMITER //
+-- get_average_metrics
+-- obtiene el promedio en las metricas de un estudiante
+CREATE PROCEDURE get_average_metrics(
+    IN p_student_id INT  UNSIGNED
+)
+BEGIN
+    SELECT 
+    ROUND(AVG(time_taken)) AS avg_time_taken,
+    ROUND(AVG(mistakes)) AS avg_mistakes,
+    ROUND(AVG(accuracy_rate),1) AS avg_accuracy_rate,
+    ROUND(AVG(pulsation_per_minute)) AS avg_pulsation_per_minute
+    
+	FROM 
+		lesson_metrics
+	WHERE 
+		student_user_id = p_student_id;
+
+END //
+DELIMITER ;
+
 
