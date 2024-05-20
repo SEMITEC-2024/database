@@ -530,7 +530,7 @@ BEGIN
     accuracy_rate
 	FROM lesson_metrics
 	WHERE student_user_id = p_student_id
-    ORDER BY lesson_metrics_id DESC
+    ORDER BY lesson_metrics_id ASC
 	LIMIT 10;
 END //
 DELIMITER ;
