@@ -158,9 +158,8 @@ DELIMITER //
 -- call get_group_info(1)
 CREATE PROCEDURE get_group_info(IN group_id INT)
 BEGIN
-    SELECT gc.group_id, gc.name AS group_name, gc.group_code, gd.day, DATE_FORMAT(gd.hour,'%H:%i') AS hour, ut.name AS teacher_name
+    SELECT gc.group_id, gc.name AS group_name, gc.group_code, ut.name AS teacher_name
     FROM group_class gc
-    INNER JOIN group_date gd ON gc.group_id = gd.group_id
     INNER JOIN group_teacher gt ON gc.group_id = gt.group_id  
     INNER JOIN user ut ON gt.teacher_user_id = ut.user_id  
     WHERE gc.group_id = group_id;
@@ -514,13 +513,42 @@ BEGIN
     ROUND(AVG(mistakes)) AS avg_mistakes,
     ROUND(AVG(accuracy_rate),1) AS avg_accuracy_rate,
     ROUND(AVG(pulsation_per_minute)) AS avg_pulsation_per_minute
-    
-	FROM 
-		lesson_metrics
-	WHERE 
-		student_user_id = p_student_id;
+	FROM lesson_metrics
+	WHERE student_user_id = p_student_id;
 
 END //
 DELIMITER ;
+
+DELIMITER //
+-- get_last_metrics
+-- obtiene las ultimas 10 metricas de la precision del estudiante
+CREATE PROCEDURE get_last_metrics(
+    IN p_student_id INT  UNSIGNED
+)
+BEGIN
+    SELECT 
+    accuracy_rate
+	FROM lesson_metrics
+	WHERE student_user_id = p_student_id
+    ORDER BY lesson_metrics_id DESC
+	LIMIT 10;
+END //
+DELIMITER ;
+
+DELIMITER //
+-- get_last_lesson
+-- obtiene la ultima leccion en la cual va el estudiante
+CREATE PROCEDURE get_last_lesson(
+    IN p_student_id INT  UNSIGNED
+)
+BEGIN
+    SELECT 
+    MAX(lesson_id) AS max_lesson_id
+	FROM lesson_metrics
+	WHERE student_user_id = p_student_id;
+END //
+DELIMITER ;
+
+
 
 
