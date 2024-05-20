@@ -529,7 +529,7 @@ BEGIN
     SELECT 
     accuracy_rate
 	FROM lesson_metrics
-	WHERE student_user_id = p_student_id
+	WHERE student_user_id = p_student_id AND is_complete = 1
     ORDER BY lesson_metrics_id ASC
 	LIMIT 10;
 END //
