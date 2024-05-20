@@ -526,15 +526,20 @@ CREATE PROCEDURE get_last_metrics(
     IN p_student_id INT  UNSIGNED
 )
 BEGIN
-    SELECT 
-    accuracy_rate,
-    time_taken,
-    mistakes,
-    pulsation_per_minute
-	FROM lesson_metrics
-	WHERE student_user_id = p_student_id 
-    ORDER BY lesson_metrics_id ASC
-	LIMIT 10;
+	SELECT * 
+	FROM (
+		SELECT 
+			lesson_metrics_id,
+			accuracy_rate,
+			time_taken,
+			mistakes,
+			pulsation_per_minute
+		FROM lesson_metrics
+		WHERE student_user_id = p_student_id
+		ORDER BY lesson_metrics_id DESC
+		LIMIT 10
+	) AS subconsulta
+	ORDER BY lesson_metrics_id ASC;
 END //
 DELIMITER ;
 
