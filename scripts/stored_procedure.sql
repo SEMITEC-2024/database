@@ -527,7 +527,10 @@ CREATE PROCEDURE get_last_metrics(
 )
 BEGIN
     SELECT 
-    accuracy_rate
+    accuracy_rate,
+    time_taken,
+    mistakes,
+    pulsation_per_minute
 	FROM lesson_metrics
 	WHERE student_user_id = p_student_id AND is_complete = 1
     ORDER BY lesson_metrics_id ASC
