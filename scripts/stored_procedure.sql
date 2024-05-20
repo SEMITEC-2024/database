@@ -532,7 +532,7 @@ BEGIN
     mistakes,
     pulsation_per_minute
 	FROM lesson_metrics
-	WHERE student_user_id = p_student_id AND is_complete = 1
+	WHERE student_user_id = p_student_id 
     ORDER BY lesson_metrics_id ASC
 	LIMIT 10;
 END //
@@ -548,7 +548,7 @@ BEGIN
     SELECT 
     MAX(lesson_id) AS max_lesson_id
 	FROM lesson_metrics
-	WHERE student_user_id = p_student_id;
+	WHERE student_user_id = p_student_id AND is_complete = 1;
 END //
 DELIMITER ;
 
