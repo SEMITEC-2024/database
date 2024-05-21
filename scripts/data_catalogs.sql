@@ -752,27 +752,3 @@ INSERT INTO level (name) VALUES
 ('Nivel 3'),
 ('Nivel 4');
 
--- Lessons
-
-INSERT INTO lesson (level_id, words, min_time, min_mistakes, name, description) VALUES
-(1, 'ff jj', 420, 5, 'Lección 1', 'En esta lección de mecanografía, practicarás la combinación "ff jj" para mejorar tu velocidad y precisión en la escritura.'),
-(1, 'fj jf', 420, 5, 'Lección 2', 'Esta lección de mecanografía se enfoca en la secuencia "fj jf", permitiéndote fortalecer tu habilidad de escritura.'),
-(1, 'ffj jjf', 420, 5, 'Lección 3', 'Practica la secuencia "ffj jjf" en esta lección de mecanografía para mejorar tu destreza en el teclado.'),
-(1, 'dd kk', 420, 5, 'Lección 4', 'Mejora tu velocidad y precisión escribiendo la combinación "dd kk" en esta lección de mecanografía.'),
-(1, 'dk kd', 420, 5, 'Lección 5', 'En esta lección de mecanografía, explorarás diferentes usos de la combinación "dk kd" para perfeccionar tu habilidad en el teclado.'),
-(1, 'ddk kkd', 420, 5, 'Lección 6', 'Fortalece tu destreza en mecanografía practicando la combinación "ddk kkd" en esta lección.'),
-(1, 'ss ll', 420, 5, 'Lección 7', 'Practica la combinación "ss ll" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(1, 'sl ls', 420, 5, 'Lección 8', 'Esta lección de mecanografía se enfoca en la secuencia "sl ls", ayudándote a aumentar tu velocidad de escritura.'),
-(1, 'ssl lls', 420, 5, 'Lección 9', 'Descubre las diferentes combinaciones de letras "ssl lls" en esta lección de mecanografía, mejorando tu habilidad en el teclado.'),
-(1, 'aa ññ', 420, 5, 'Lección 10', 'Mejora tu habilidad en mecanografía escribiendo la combinación "aa ññ" en esta lección diseñada para aumentar tu velocidad.'),
-(1, 'añ ña', 420, 5, 'Lección 11', 'En esta lección de mecanografía, practicarás la secuencia "añ ña" para perfeccionar tu técnica en el teclado.'),
-(1, 'aañ ñña', 420, 5, 'Lección 12', 'Fortalece tu destreza en mecanografía practicando la secuencia "aañ ñña" en esta lección diseñada para mejorar tu velocidad y precisión.'),
-(2, 'ala ala ala las las las', 420, 5, 'Lección 13', 'En esta lección de mecanografía, explorarás la secuencia "ala ala ala las las las" para mejorar tu velocidad y precisión en la escritura.'),
-(2, 'das das das aja aja aja', 420, 5, 'Lección 14', 'Practica la combinación "das das das aja aja aja" en esta lección de mecanografía para fortalecer tu habilidad en el teclado.'),
-(2, 'aña aña aña kak kak kak', 420, 5, 'Lección 15', 'Mejora tu habilidad en mecanografía escribiendo la secuencia "aña aña aña kak kak kak" en esta lección diseñada para aumentar tu velocidad.'),
-(2, 'fal fal fal aña aña aña', 420, 5, 'Lección 16', 'En esta lección de mecanografía, explorarás diferentes combinaciones de letras "fal fal fal aña aña aña" para mejorar tu destreza en el teclado.'),
-(2, 'saña saña', 420, 5, 'Lección 17', 'Descubre las diferentes combinaciones de letras "saña saña" en esta lección de mecanografía, fortaleciendo tu habilidad en el teclado.'),
-(3, 'falda falda', 420, 5, 'Lección 18', 'Practica la secuencia "falda falda" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'falda falda jaka jaka', 420, 5, 'Lección 19', 'Practica la secuencia "falda falda jaka jaka" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'salda salda salsa salsa', 420, 5, 'Lección 20', 'Practica la secuencia "salsa salda salsa salsa" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.'),
-(3, 'dasa dasa sada sada', 420, 5, 'Lección 21', 'Practica la secuencia "dasa dasa sada sada" en esta lección de mecanografía para mejorar tu velocidad y precisión en la escritura.');
