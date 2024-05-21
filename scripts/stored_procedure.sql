@@ -249,14 +249,12 @@ DELIMITER //
 
 -- insert_group_class
 -- Procedimiento que crea grupos, crea un group_code y lo devulve exitosamente
--- CALL insert_group_class(1, 'Grupo A1', @group_code);
+-- CALL insert_group_class(1, 'Grupo A1', 1);
 -- SELECT @group_code AS group_code;
 CREATE PROCEDURE insert_group_class(
     IN p_next_lesson_id TINYINT UNSIGNED,
     IN p_name VARCHAR(16),
-    IN p_teacher_user_id INT UNSIGNED,
-    IN p_day ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"),
-    IN p_hour TIME
+    IN p_teacher_user_id INT UNSIGNED
 )
 BEGIN
     DECLARE v_group_code VARCHAR(16);
@@ -274,9 +272,6 @@ BEGIN
     
     INSERT INTO group_teacher (group_id, teacher_user_id)
     VALUES (var_group_id, p_teacher_user_id);
-    
-    INSERT INTO group_date (group_id, hour, day)
-    VALUES(var_group_id,p_hour,p_day);
     
     SELECT var_group_id AS group_id,v_group_code AS group_code;
 END //
