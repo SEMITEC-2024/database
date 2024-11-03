@@ -1,7 +1,7 @@
 
 # DB Funciones
 
-* [Creación de colaboradores (registro)](#usuarios)
+* [Usuarios](#usuarios)
 * [Lecciones](#lecciones)
 * [Ubicaciones e instituciones](#ubicaciones-e-instituciones)
 
