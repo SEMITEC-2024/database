@@ -8,6 +8,7 @@
 ## Usuarios
 ### Obtener tipo de usuario
 **Nombre:** get_user_type
+
 **Descripción:** Obtiene todos los tipos de usuarios existentes
 #### Parámetros de entrada:
 Ninguno
@@ -31,6 +32,7 @@ Ninguno
 
 ### Obtener usuario
 **Nombre:** get_user
+
 **Descripción:** Obtiene la información completa de un usuario
 #### Parámetros de entrada:
 - `var_user_id`: integer
@@ -63,6 +65,7 @@ Ninguno
 ```
 ### Obtener estudiante
 **Nombre:** get_student
+
 **Descripción:** Obtiene la información completa de un estudiante
 #### Parámetros de entrada:
 - `var_student_id`: integer
@@ -101,6 +104,7 @@ Ninguno
 
 ### Obtener estudiantes por nombre
 **Nombre:** get_students_by_name
+
 **Descripción:** Obtiene la lista de los estudiantes según su nombre
 #### Parámetros de entrada:
 - `var_name`: varchar(64)
@@ -121,6 +125,7 @@ Ninguno
 
 ### Obtener estudiantes por institución
 **Nombre:** get_students_by_institution
+
 **Descripción:** Obtiene la lista de los estudiantes según su institución
 #### Parámetros de entrada:
 - `var_institution_id`: integer
@@ -141,6 +146,7 @@ Ninguno
 ## Grupos
 ### Obtener información del grupo
 **Nombre:** get_group_info
+
 **Descripción:** Obtiene información de un grupo según su ID
 #### Parámetros de entrada:
 - `var_group_id`: integer
@@ -164,6 +170,7 @@ Ninguno
 
 ### Obtener grupos por profesor
 **Nombre:** get_group_teacher
+
 **Descripción:** Obtiene la información de los grupos según el profesor.
 #### Parámetros de entrada:
 - `teacher_id`: integer
@@ -184,6 +191,7 @@ Ninguno
 ```
 ### Obtener estudiantes del grupo PENDIENTE
 **Nombre:** students_group
+
 **Descripción:** Obtiene todos los estudiantes de un grupo
 #### Parámetros de entrada:
 - `var_group_id`: integer
@@ -206,6 +214,7 @@ Ninguno
 ```
 ### Obtener información de un grupo (ALT) PENDIENTE
 **Nombre:** get_group_class
+
 **Descripción:** Obtiene información alternativa de un grupo según el ID.
 #### Parámetros de entrada:
 - `var_group_id`: integer
@@ -229,6 +238,7 @@ Ninguno
 
 ### Obtener información grupo (Estudiante)
 **Nombre:** get_group_info_by_student
+
 **Descripción:** Obtiene la información de los grupos a los que pertenece un estudiante
 #### Parámetros de entrada:
 - `var_user_id`: integer
@@ -253,6 +263,7 @@ Ninguno
 ## Lecciones
 ### Obtener lección PENDIENTE
 **Nombre:** get_lesson
+
 **Descripción:** Obtiene la información de una lección según el ID 
 #### Parámetros de entrada:
 - `var_lesson_id`: integer
@@ -284,6 +295,7 @@ Ninguno
 ```
 ### Obtener métricas del estudiante
 **Nombre:** get_lesson_metrics_student
+
 **Descripción:** Obtiene todas las métricas según el ID del estudiante 
 #### Parámetros de entrada:
 - `var_student_id`: integer
@@ -318,6 +330,7 @@ Ninguno
 ```
 ### Obtener lecciones públicas (PENDIENTE)
 **Nombre:** get_lessons_public
+
 **Descripción:** Obtiene todas las lecciones públicas
 #### Parámetros de entrada:
 - ``: integer
@@ -332,6 +345,7 @@ Ninguno
 
 ### Obtener lecciones por profesor PENDIENTE
 **Nombre:** get_lessons_private_by_teacher
+
 **Descripción:** Obtiene todas las lecciones creadas por un profesor.
 #### Parámetros de entrada:
 - ``: integer
@@ -349,6 +363,7 @@ Ninguno
 ## Ubicaciones e instituciones
 ### Obtener países
 **Nombre:** get_country
+
 **Descripción:** Obtiene todos los paises existentes
 #### Parámetros de entrada:
 Ninguno
@@ -367,6 +382,7 @@ Ninguno
 ```
 ### Obtener provincias
 **Nombre:** get_province
+
 **Descripción:** Obtiene todas las provincias existentes de un país
 #### Parámetros de entrada:
 - `var_country_id`: integer
@@ -393,6 +409,7 @@ Ninguno
 ```
 ### Obtener cantones
 **Nombre:** get_canton
+
 **Descripción:** Obtiene todos los cantones existentes según la provincia
 #### Parámetros de entrada:
 - `var_province_id`: integer
@@ -418,6 +435,7 @@ Ninguno
 ```
 ### Obtener distritos
 **Nombre:** get_district
+
 **Descripción:** Obtiene todos los cantones existentes según el cantón
 #### Parámetros de entrada:
 - `var_canton_id`: integer
@@ -444,6 +462,7 @@ Ninguno
 ```
 ### Obtener instituciones por país
 **Nombre:** get_institution
+
 **Descripción:** Obtiene todas las instituciones según el país.
 #### Parámetros de entrada:
 - `var_country_id`: integer
@@ -470,6 +489,7 @@ Ninguno
 ```
 ### Obtener instituciones por distrito
 **Nombre:** get_institution_by_district
+
 **Descripción:** Obtiene todos los cantones existentes según la provincia
 #### Parámetros de entrada:
 - `var_district_id`: integer
@@ -492,6 +512,7 @@ Ninguno
 ```
 ### Obtener nivel educativo
 **Nombre:** get_education_level
+
 **Descripción:** Obtiene todos los niveles educativos existentes
 #### Parámetros de entrada:
 Ninguno
