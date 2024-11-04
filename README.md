@@ -631,7 +631,7 @@ Ninguno
 ### Obtener lecciones privadas de profesor (Páginación)
 **Nombre:** get_lessons_private_by_teacher_pages
 
-**Descripción:** Obtiene 
+**Descripción:** Obtiene las lecciones creadas por un profesor en particular, con paginación.
 #### Parámetros de entrada:
 - `var_teacher_id`: integer
 - `var_page_number`: integer - Default 1
@@ -720,17 +720,18 @@ Ninguno
 - `var_min_mistakes`: smallint
 - `var_name`: varchar(32)
 - `var_description`: varchar(128)
-- `var_lesson_code`: varchar(16)
 - `var_assignment`: bit
 - `var_shared`: bit	
 #### Parámetros de salida
-- `insert_lesson`: boolean
+- `success`: boolean
+- `lesson_id`: integer
 
 #### Ejemplo de respuesta
 ```json
 [
   {
-    "insert_lesson": true
+    "outlesson_id": 20,
+    "success": true
   }
 ]
 ```
@@ -761,6 +762,24 @@ Ninguno
 ]
 ```
 
+### Asignar lección a estudiantes
+**Nombre:** assign_lesson
+
+**Descripción:** Asigna una lección ya creada a estudiantes 
+#### Parámetros de entrada:
+- `lesson_id`: integer
+- `students_ids`: integer[]
+#### Parámetros de salida
+- `assign_lesson`: boolean
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "assign_lesson": true
+  }
+]
+```
 
 ## Ubicaciones e instituciones
 ### Obtener países
