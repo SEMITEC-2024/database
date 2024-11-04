@@ -263,6 +263,24 @@ Ninguno
 ]
 ```
 
+### Obtener la cantidad de grupos por profesor (Paginación)
+**Nombre:** get_group_teacher_count
+
+**Descripción:** Obtiene la cantidad de grupos que tenga un profesor el profesor.
+#### Parámetros de entrada:
+- `teacher_id`: integer
+#### Parámetros de salida
+- `get_group_teacher_count`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_group_teacher_count": 1
+  }
+]
+```
+
 ### Obtener grupos por profesor (Paginación)
 **Nombre:** get_group_teacher_per_page
 
@@ -509,6 +527,57 @@ Ninguno
 ]
 ```
 
+### Obtener lecciones por profesor
+**Nombre:** get_lessons_private_by_teacher
+
+**Descripción:** Obtiene todas las lecciones creadas por un profesor.
+#### Parámetros de entrada:
+- `var_teacher_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 4,
+    "level_id": 2,
+    "content": "Teclas de la fila superior.",
+    "iterations": 10,
+    "min_time": 6,
+    "min_mistakes": 2,
+    "name": "Fila Superior",
+    "description": "Aprende las teclas de la fila superior del teclado.",
+    "lesson_code": "MEC4",
+    "assignment": "1",
+    "shared": "0"
+  },
+  {
+    "lesson_id": 15,
+    "level_id": 2,
+    "content": "Ejercicios combinados con todas las filas.",
+    "iterations": 15,
+    "min_time": 9,
+    "min_mistakes": 3,
+    "name": "Ejercicios Combinados",
+    "description": "Práctica con todas las filas del teclado.",
+    "lesson_code": "MEC15",
+    "assignment": "1",
+    "shared": "0"
+  }
+]
+```
+
 ### Obtener lecciones públicas
 **Nombre:** get_lessons_public
 
@@ -563,56 +632,24 @@ Ninguno
 ]
 ```
 
-### Obtener lecciones por profesor
-**Nombre:** get_lessons_private_by_teacher
+### Obtener cantidad de lecciones públicas (Paginación)
+**Nombre:** get_lessons_public_count
 
-**Descripción:** Obtiene todas las lecciones creadas por un profesor.
+**Descripción:** Obtiene la cantidad de prácticas públicas en el sistema.
 #### Parámetros de entrada:
-- `var_teacher_id`: integer
+Ninguno
 #### Parámetros de salida
-- `lesson_id`: integer
-- `level_id`: smallint
-- `content`: varchar(256)
-- `iterations`: smallint
-- `min_time`: smallint
-- `min_mistakes`: smallint
-- `name`: varchar(16)
-- `description`: varchar(128)
-- `lesson_code`: varchar(16)
-- `assignment`: bit
-- `shared`: bit
+- `get_lessons_public_count`: integer
 
 #### Ejemplo de respuesta
 ```json
 [
   {
-    "lesson_id": 4,
-    "level_id": 2,
-    "content": "Teclas de la fila superior.",
-    "iterations": 10,
-    "min_time": 6,
-    "min_mistakes": 2,
-    "name": "Fila Superior",
-    "description": "Aprende las teclas de la fila superior del teclado.",
-    "lesson_code": "MEC4",
-    "assignment": "1",
-    "shared": "0"
-  },
-  {
-    "lesson_id": 15,
-    "level_id": 2,
-    "content": "Ejercicios combinados con todas las filas.",
-    "iterations": 15,
-    "min_time": 9,
-    "min_mistakes": 3,
-    "name": "Ejercicios Combinados",
-    "description": "Práctica con todas las filas del teclado.",
-    "lesson_code": "MEC15",
-    "assignment": "1",
-    "shared": "0"
+    "get_lessons_public_count": 12
   }
 ]
 ```
+
 ### Obtener lecciones públicas (Páginación)
 **Nombre:** get_lessons_public_per_page
 
