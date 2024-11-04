@@ -262,6 +262,31 @@ Ninguno
   }
 ]
 ```
+
+### Obtener grupos por profesor (Paginación)
+**Nombre:** get_group_teacher_per_page
+
+**Descripción:** Obtiene la información de los grupos según el profesor según paginación.
+#### Parámetros de entrada:
+- `teacher_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `group_id`: integer
+- `group_name`: varchar(16)
+- `group_code`: varchar(16)
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "group_id": 1,
+    "group_name": "Grupo A",
+    "group_code": "GRA2024"
+  }
+]
+```
+
 ### Obtener estudiantes del grupo
 **Nombre:** students_group
 
