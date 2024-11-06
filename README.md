@@ -1,6 +1,7 @@
 # DB Funciones
 
 * [Usuarios](#usuarios)
+* [Grupos](#grupos)
 * [Lecciones](#lecciones)
 * [Ubicaciones e instituciones](#ubicaciones-e-instituciones)
 
