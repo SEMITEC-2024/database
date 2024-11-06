@@ -306,7 +306,7 @@ Ninguno
 ```
 
 ### Obtener estudiantes del grupo
-**Nombre:** students_group
+**Nombre:** get_group_students
 
 **Descripción:** Obtiene todos los estudiantes de un grupo
 #### Parámetros de entrada:
@@ -328,6 +328,42 @@ Ninguno
   }
 ]
 ```
+
+### Obtener la cantidad de estudiantes en un grupo (Paginación)
+**Nombre:** get_group_students_count
+
+**Descripción:** Obtiene la cantidad de estudiantes que hay en un grupo, útil para paginación.
+#### Parámetros de entrada:
+- `var_group_id`: integer
+#### Parámetros de salida
+- `get_group_students_count`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_group_students_count": 5
+  }
+]
+```
+
+### Obtener estudiantes de un grupo (Paginación)
+**Nombre:** get_group_students_per_page
+
+**Descripción:** Obtiene 
+#### Parámetros de entrada:
+- `var_group_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `student_id`: integer
+- `student_name`: varchar(64)
+
+#### Ejemplo de respuesta
+```json
+
+```
+
 ### Obtener información de un grupo (ALT)
 **Nombre:** get_group_class
 
