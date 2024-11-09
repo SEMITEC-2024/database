@@ -195,25 +195,56 @@ Ninguno
 ]
 ```
 
-### Asignar nueva información de usuario (PENDIENTE, no usar)
-**Nombre:** edit_user
+### Asignar nueva información de profesor
+**Nombre:** update_teacher
 
-**Descripción:** Asigna/actualiza la información de un usuario solicitante
+**Descripción:** Asigna/actualiza la información de un profesor solicitante
  
 #### Parámetros de entrada:
 - `var_user_id`: integer
 - `var_institution_id`: integer
 - `var_district_id`: integer
 - `var_name`: varchar(64)
-- `var_password`: varchar(60)
 - `var_email`: varchar(32)
 - `var_other_signs`: varchar(128)
+- `var_password`: varchar(60) DEFAULT NULL
 #### Parámetros de salida
-- `edit_user`: boolean
+- `update_teacher`: boolean
 
 #### Ejemplo de respuesta
 ```json
-//PENDIENTE
+[
+  {
+    "update_teacher": true
+  }
+]
+```
+
+### Asignar nueva información de estudiante
+**Nombre:** update_student
+
+**Descripción:** Asigna/actualiza la información de un estudiante solicitante
+ 
+#### Parámetros de entrada:
+- `var_user_id`: integer
+- `var_institution_id`: integer
+- `var_district_id`: integer
+- `var_name`: varchar(64)
+- `var_email`: varchar(32)
+- `var_other_signs`: varchar(128),
+- `var_date_birth`: date
+- `var_education_level`: smallint
+- `var_password`: varchar(60) DEFAULT NULL
+#### Parámetros de salida
+- `update_student`: boolean
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "update_student": true
+  }
+]
 ```
 
 
