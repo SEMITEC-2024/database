@@ -276,7 +276,7 @@ Ninguno
 ### Obtener grupos por profesor
 **Nombre:** get_group_teacher
 
-**Descripción:** Obtiene la información de los grupos según el profesor.
+**Descripción:** Obtiene la información de todos los grupos según el profesor.
 #### Parámetros de entrada:
 - `teacher_id`: integer
 #### Parámetros de salida
@@ -337,26 +337,49 @@ Ninguno
 ]
 ```
 
-### Obtener estudiantes del grupo
-**Nombre:** get_group_students
+### Obtener cantidad de grupos por estudiante (Páginación)
+**Nombre:** get_group_student_count
 
-**Descripción:** Obtiene todos los estudiantes de un grupo
+**Descripción:** Obtiene la cantidad de grupos a los que pertenece un estudiante, útil para paginación.
 #### Parámetros de entrada:
-- `var_group_id`: integer
+- `var_student_id`: integer
 #### Parámetros de salida
-- `student_id`: integer
-- `student_name`: varchar(64)
+- `get_group_student_count`: integer
 
 #### Ejemplo de respuesta
 ```json
 [
   {
-    "student_id": 1,
-    "student_name": "Carlos Pérez"
+    "get_group_student_count": 2
+  }
+]
+```
+
+### Obtener grupos por estudiante (Páginación)
+**Nombre:** get_group_student_per_page
+
+**Descripción:** Obtiene una lista de grupos a los que pertenece un estudiante, por paginación.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `group_id`: integer
+- `group_name`: varchar(16)
+- `group_code`: varchar(16)
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "group_id": 1,
+    "group_name": "Grupo A",
+    "group_code": "GRA2024"
   },
   {
-    "student_id": 2,
-    "student_name": "Ana Torres"
+    "group_id": 3,
+    "group_name": "Grupo C",
+    "group_code": "GRC2024"
   }
 ]
 ```
@@ -382,7 +405,7 @@ Ninguno
 ### Obtener estudiantes de un grupo (Paginación)
 **Nombre:** get_group_students_per_page
 
-**Descripción:** Obtiene 
+**Descripción:** Obtiene los estudiantes de un grupo, con paginación.
 #### Parámetros de entrada:
 - `var_group_id`: integer
 - `var_page_number`: integer - Default 1
@@ -479,6 +502,25 @@ Ninguno
 [
   {
     "insert_student_in_group": true
+  }
+]
+```
+
+### Eliminar estudiante de un grupo
+**Nombre:** delete_student_from_group
+
+**Descripción:** Elimina a un estudiante del grupo específicado 
+#### Parámetros de entrada:
+- `var_group_id`: smallint
+- `var_student_user_id`: integer
+#### Parámetros de salida
+- `delete_student_from_group`: boolean
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "delete_student_from_group": true
   }
 ]
 ```
@@ -595,6 +637,247 @@ Ninguno
 ]
 ```
 
+### Obtener cantidad de lecciones asignadas completadas y pendientes de un estudiante
+**Nombre:** get_lessons_count_pending_completed_student
+
+**Descripción:** Obtiene la cantidad de lecciones asignadas y pendientes de un estudiante.
+Si el parámetro var_teacher_id es dado, contabiliza solo las tareas asignadas por ese docente a ese estudiante; de lo contrario contabiliza todas.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+- `var_teacher_id`: integer
+#### Parámetros de salida
+- `assigned_lessons_count`: integer
+- `unique_metrics_count`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "assigned_lessons_count": 1,
+    "unique_metrics_count": 0
+  }
+]
+```
+
+### Obtener cantidad de lecciones con métricas de un estudiante específico (Paginación)
+**Nombre:** get_lesson_student_history_count
+
+**Descripción:** Obtiene la cantidad de lecciones distintas realizadas por el estudiante. Funciona como una forma de "historial". 
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `get_lesson_student_history_count`: integer
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_lesson_student_history_count": 4
+  }
+]
+```
+
+### Obtener lecciones con métricas de un estudiante específico (Paginación)
+**Nombre:** get_lesson_student_history_per_page
+
+**Descripción:** Obtiene información de lecciones distintas realizadas por el estudiante. Funciona como una forma de "historial"; por página.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `lesson_id`: integer
+- `name`: varchar(16)
+- `lesson_code`: varchar(16)
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 1,
+    "name": "Mecanografía Básica",
+    "lesson_code": "MEC1"
+  },
+  {
+    "lesson_id": 2,
+    "name": "Fila de Inicio",
+    "lesson_code": "MEC2"
+  }
+]
+```
+
+### Obtener información siguiente tarea de estudiante
+**Nombre:** get_lessons_next_assignment
+
+**Descripción:** Obtiene la información de la siguiente tarea más antigua de un estudiante. Esto significa que el estudiante la intentó y en ningún intento la ha aprobado o no la ha hecho.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 29,
+    "level_id": 2,
+    "content": "salsa salsa salsa salsa salsa salsa salsa salsa",
+    "iterations": 1,
+    "min_time": 120,
+    "min_mistakes": 5,
+    "name": "Actividad 1",
+    "description": "Prueba de asignación de lecciones",
+    "lesson_code": "LEC8223"
+  }
+]
+```
+
+### Obtener tarea asignada a estudiante por código (Búsqueda)
+**Nombre:** get_lessons_student_assigned_by_code
+
+**Descripción:** Obtiene una tarea por código, que pertenezca al estudiante en específico.
+#### Parámetros de entrada:
+- `var_lesson_code`: varchar(16)
+- `var_student_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 29,
+    "level_id": 2,
+    "content": "salsa salsa salsa salsa salsa salsa salsa salsa",
+    "iterations": 1,
+    "min_time": 120,
+    "min_mistakes": 5,
+    "name": "Actividad 1",
+    "description": "Prueba de asignación de lecciones",
+    "lesson_code": "LEC8223"
+  }
+]
+```
+
+### Obtener cantidad de tareas asignadas a un estudiante (Paginación)
+**Nombre:** get_lessons_assigned_student_count
+
+**Descripción:** Obtiene la cantidad de lecciones asignadas a un estudiante, sin importar profesor.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `get_lessons_assigned_student_count`: integer
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_lessons_assigned_student_count": 1
+  }
+]
+```
+
+### Obtener cantidad de tareas asignadas a un estudiante (Paginación)
+**Nombre:** get_lessons_assigned_student_per_page
+
+**Descripción:** Obtiene información de lecciones asignadas a un estudiante, sin importar profesor. Utiliza paginación.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 29,
+    "level_id": 2,
+    "content": "salsa salsa salsa salsa salsa salsa salsa salsa",
+    "iterations": 1,
+    "min_time": 120,
+    "min_mistakes": 5,
+    "name": "Actividad 1",
+    "teacher_name": "Teacher 1",
+    "description": "Prueba de asignación de lecciones",
+    "lesson_code": "LEC8223",
+    "assignment": "1",
+    "shared": "0"
+  }
+]
+```
+
+### Obtener lección creada por un profesor por código
+**Nombre:** get_lessons_teacher_created_by_code
+
+**Descripción:** Obtiene información de una lección creada por un profesor según el código
+#### Parámetros de entrada:
+- `var_lesson_code`: varchar(16)
+- `var_teacher_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 30,
+    "name_level": "Nivel 1",
+    "content": "asdfghjkl asdfghjkl",
+    "iterations": 2,
+    "min_time": 120,
+    "min_mistakes": 232,
+    "name": "PruebaDos",
+    "teacher_name": "Teacher 1",
+    "description": "Segunda prueba de creación de prácticas",
+    "lesson_code": "LEC1589",
+    "assignment": "1",
+    "shared": "1"
+  }
+]
+```
+
 ### Obtener lecciones por profesor
 **Nombre:** get_lessons_private_by_teacher
 
@@ -699,6 +982,45 @@ Ninguno
   }
 ]
 ```
+### Obtener lección pública o privada por código (Búsqueda)
+**Nombre:** get_lessons_public_any_by_code
+
+**Descripción:** Obtiene, según código, la información de cualquier lección creada por profesores, sin importar si la asignó como privada.
+#### Parámetros de entrada:
+- `var_lesson_code`: varchar(16)
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 19,
+    "name_level": "Nivel 2",
+    "content": "Activity content",
+    "iterations": 1,
+    "min_time": 10,
+    "min_mistakes": 5,
+    "name": "Lesson name",
+    "teacher_name": "María Cordero",
+    "description": "Lesson description",
+    "lesson_code": "LEC001",
+    "assignment": "1",
+    "shared": "0"
+  }
+]
+```
 
 ### Obtener cantidad de lecciones públicas (Paginación)
 **Nombre:** get_lessons_public_count
@@ -758,6 +1080,108 @@ Ninguno
   }
 ]
 ```
+
+### Obtener lecciones predeterminadas por código (Búsqueda)
+**Nombre:** get_lessons_default_by_code
+
+**Descripción:** Obtiene una lección pretederminada según el código de la lección. Dado que el código es único, debería retornar solo 1.
+#### Parámetros de entrada:
+- `var_lesson_code`: varchar(16)
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 3,
+    "name_level": "Nivel 1",
+    "content": "Ejercicios de dedos en la fila de inicio.",
+    "iterations": 12,
+    "min_time": 6,
+    "min_mistakes": 2,
+    "name": "Ejercicios de Inicio",
+    "teacher_name": "Elena Vargas",
+    "description": "Práctica los ejercicios de mecanografía con la fila de inicio.",
+    "lesson_code": "MEC3",
+    "assignment": "0",
+    "shared": "0"
+  }
+]
+```
+
+### Obtener cantidad de lecciones pretederminadas (Páginación)
+**Nombre:** get_lessons_default_count
+
+**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación
+#### Parámetros de entrada:
+Ninguno
+#### Parámetros de salida
+- `get_lessons_default_count`: integer
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_lessons_default_count": 21
+  }
+]
+```
+
+### Obtener información de lecciones pretederminadas (Páginación)
+**Nombre:** get_lessons_default_per_page
+
+**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación
+#### Parámetros de entrada:
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `get_lessons_default_count`: integer
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 3,
+    "level_id": 1,
+    "content": "Ejercicios de dedos en la fila de inicio.",
+    "iterations": 12,
+    "min_time": 6,
+    "min_mistakes": 2,
+    "name": "Ejercicios de Inicio",
+    "teacher_name": "Elena Vargas",
+    "description": "Práctica los ejercicios de mecanografía con la fila de inicio.",
+    "lesson_code": "MEC3",
+    "assignment": "0",
+    "shared": "0"
+  },
+  {
+    "lesson_id": 5,
+    "level_id": 2,
+    "content": "Ejercicios de dedos en la fila superior.",
+    "iterations": 10,
+    "min_time": 7,
+    "min_mistakes": 2,
+    "name": "Ejercicios de Fila Superior",
+    "teacher_name": "Silvia Jiménez",
+    "description": "Practica la mecanografía en la fila superior.",
+    "lesson_code": "MEC5",
+    "assignment": "0",
+    "shared": "0"
+  }
+]
+```
+
+
 ### Obtener lecciones privadas de profesor (Páginación)
 **Nombre:** get_lessons_private_by_teacher_pages
 
@@ -810,6 +1234,24 @@ Ninguno
   }
 ]
 ```
+
+### Obtener lexemas sugeridos
+**Nombre:** get_lexeme_all
+
+**Descripción:** Obtiene todos los lexemas de acceso rápido 
+#### Parámetros de entrada:
+Ninguno
+#### Parámetros de salida
+- `lexeme_name`: varchar(16)
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lexeme_name": "salsa salsa"
+  }
+]
+```
+
 ### Obtener niveles de lecciones
 **Nombre:** get_level
 
@@ -907,6 +1349,37 @@ Ninguno
 [
   {
     "assign_lesson": true
+  }
+]
+```
+
+### Crear y asignar lección a estudiantes
+**Nombre:** create_and_assign_lesson
+
+**Descripción** Crea una lección y la asigna a los estudiantes proporcionados. Si algo falla en el proceso, toda la transacción hace rollback.
+#### Parámetros de entrada:
+- `var_level_id`: smallint
+- `var_teacher_id`: integer
+- `var_content`: varchar(256)
+- `var_iterations`: smallint
+- `var_max_time`: smallint
+- `var_max_mistakes`: smallint
+- `var_name`: varchar(16)
+- `var_description`: varchar(128)
+- `var_assignment`: bit
+- `var_shared`: bit
+- `students_ids`: integer[]  
+#### Parámetros de salida:
+- `outlesson_code`: integer
+- `successcode`: boolean
+- `error_message`: varchar
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "outlesson_code": 28,
+    "successcode": true
+    "error_message": "Good",
   }
 ]
 ```
