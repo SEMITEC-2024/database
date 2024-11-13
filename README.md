@@ -142,6 +142,54 @@ Ninguno
 ]
 ```
 
+### Obtener cantidad de estudiantes por nombre y/o institución (Búsqueda) (Paginación)
+**Nombre:** get_students_by_name_and_institution_count
+
+**Descripción:** Obtiene la cantidad de estudiantes según su nombre y/o institución. Si falta un parámetro se utiliza el otro. Excluye a estudiantes que pertenezcan al grupo donde se intenta agregar al estudiante.
+#### Parámetros de entrada:
+- `var_name`: varchar(32)
+- `var_institution_id`: integer
+- `var_group_id`: integer
+#### Parámetros de salida
+- `get_students_by_name_and_institution_count`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "get_students_by_name_and_institution_count": 2
+  }
+]
+```
+
+### Obtener estudiantes por nombre y/o institución (Búsqueda) (Paginación)
+**Nombre:** get_students_by_name_and_institution_per_page
+
+**Descripción:** Obtiene la información de estudiantes según su nombre y/o institución. Si falta un parámetro se utiliza el otro. Excluye a estudiantes que pertenezcan al grupo donde se intenta agregar al estudiante.
+#### Parámetros de entrada:
+- `var_name`: varchar(32)
+- `var_institution_id`: integer
+- `var_group_id`: integer
+- `var_page_number`: integer - Default 1
+- `var_page_size`: integer - Default 10
+#### Parámetros de salida
+- `user_id`: integer
+- `name`: varchar(64)
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "user_id": 44,
+    "name": "Roderick Murphy"
+  },
+  {
+    "user_id": 76,
+    "name": "Rosie Murphy"
+  }
+]
+```
+
+
 ### Crear usuario (Profesor)
 **Nombre:** insert_teacher
 
@@ -636,6 +684,35 @@ Ninguno
   }
 ]
 ```
+
+### Obtener PPM y Precisión de todas las métricas de un estudiante
+**Nombre:** get_ppm_and_precision
+
+**Descripción:** Obtiene todas las entradas de PPM y Precisión de un estudiante.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `accuracy_rate`: real
+- `pulsation_per_minute`: smallint
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "accuracy_rate": 95.5,
+    "pulsation_per_minute": 65
+  },
+  {
+    "accuracy_rate": 97,
+    "pulsation_per_minute": 72
+  },
+  {
+    "accuracy_rate": 88.2,
+    "pulsation_per_minute": 58
+  }
+]
+```
+
 
 ### Obtener cantidad de lecciones asignadas completadas y pendientes de un estudiante
 **Nombre:** get_lessons_count_pending_completed_student
