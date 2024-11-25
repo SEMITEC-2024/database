@@ -818,52 +818,15 @@ Si el parámetro var_teacher_id es dado, contabiliza solo las tareas asignadas p
 ]
 ```
 
-### Obtener tarea asignada a estudiante por código (Búsqueda)
-**Nombre:** get_lessons_student_assigned_by_code
-
-**Descripción:** Obtiene una tarea por código, que pertenezca al estudiante en específico.
-#### Parámetros de entrada:
-- `var_lesson_code`: varchar(16)
-- `var_student_id`: integer
-#### Parámetros de salida
-- `lesson_id`: integer
-- `level_id`: smallint
-- `content`: varchar(256)
-- `iterations`: smallint
-- `min_time`: smallint
-- `min_mistakes`: smallint
-- `name`: varchar(16)
-- `teacher_name`: varchar(64)
-- `description`: varchar(128)
-- `lesson_code`: varchar(16)
-- `assignment`: bit
-- `shared`: bit
-
-#### Ejemplo de respuesta
-```json
-[
-  {
-    "lesson_id": 29,
-    "level_id": 2,
-    "content": "salsa salsa salsa salsa salsa salsa salsa salsa",
-    "iterations": 1,
-    "min_time": 120,
-    "min_mistakes": 5,
-    "name": "Actividad 1",
-    "description": "Prueba de asignación de lecciones",
-    "lesson_code": "LEC8223"
-  }
-]
-```
-
 ### Obtener cantidad de tareas asignadas a un estudiante (Paginación)
 **Nombre:** get_lessons_assigned_student_count
 
-**Descripción:** Obtiene la cantidad de lecciones asignadas a un estudiante, sin importar profesor.
+**Descripción:** Obtiene la cantidad de lecciones asignadas a un estudiante, sin importar profesor. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
 - `var_student_id`: integer
 - `var_page_number`: integer - Default 1
 - `var_page_size`: integer - Default 10
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `get_lessons_assigned_student_count`: integer
 #### Ejemplo de respuesta
@@ -878,9 +841,10 @@ Si el parámetro var_teacher_id es dado, contabiliza solo las tareas asignadas p
 ### Obtener cantidad de tareas asignadas a un estudiante (Paginación)
 **Nombre:** get_lessons_assigned_student_per_page
 
-**Descripción:** Obtiene información de lecciones asignadas a un estudiante, sin importar profesor. Utiliza paginación.
+**Descripción:** Obtiene información de lecciones asignadas a un estudiante, sin importar profesor. Utiliza paginación. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
 - `var_student_id`: integer
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `lesson_id`: integer
 - `level_id`: smallint
@@ -914,53 +878,13 @@ Si el parámetro var_teacher_id es dado, contabiliza solo las tareas asignadas p
 ]
 ```
 
-### Obtener lección creada por un profesor por código
-**Nombre:** get_lessons_teacher_created_by_code
-
-**Descripción:** Obtiene información de una lección creada por un profesor según el código
-#### Parámetros de entrada:
-- `var_lesson_code`: varchar(16)
-- `var_teacher_id`: integer
-#### Parámetros de salida
-- `lesson_id`: integer
-- `level_id`: smallint
-- `content`: varchar(256)
-- `iterations`: smallint
-- `min_time`: smallint
-- `min_mistakes`: smallint
-- `name`: varchar(16)
-- `teacher_name`: varchar(64)
-- `description`: varchar(128)
-- `lesson_code`: varchar(16)
-- `assignment`: bit
-- `shared`: bit
-
-#### Ejemplo de respuesta
-```json
-[
-  {
-    "lesson_id": 30,
-    "name_level": "Nivel 1",
-    "content": "asdfghjkl asdfghjkl",
-    "iterations": 2,
-    "min_time": 120,
-    "min_mistakes": 232,
-    "name": "PruebaDos",
-    "teacher_name": "Teacher 1",
-    "description": "Segunda prueba de creación de prácticas",
-    "lesson_code": "LEC1589",
-    "assignment": "1",
-    "shared": "1"
-  }
-]
-```
-
 ### Obtener lecciones por profesor
 **Nombre:** get_lessons_private_by_teacher
 
 **Descripción:** Obtiene todas las lecciones creadas por un profesor.
 #### Parámetros de entrada:
 - `var_teacher_id`: integer
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `lesson_id`: integer
 - `level_id`: smallint
@@ -1059,52 +983,13 @@ Ninguno
   }
 ]
 ```
-### Obtener lección pública o privada por código (Búsqueda)
-**Nombre:** get_lessons_public_any_by_code
-
-**Descripción:** Obtiene, según código, la información de cualquier lección creada por profesores, sin importar si la asignó como privada.
-#### Parámetros de entrada:
-- `var_lesson_code`: varchar(16)
-#### Parámetros de salida
-- `lesson_id`: integer
-- `level_id`: smallint
-- `content`: varchar(256)
-- `iterations`: smallint
-- `min_time`: smallint
-- `min_mistakes`: smallint
-- `name`: varchar(16)
-- `teacher_name`: varchar(64)
-- `description`: varchar(128)
-- `lesson_code`: varchar(16)
-- `assignment`: bit
-- `shared`: bit
-
-#### Ejemplo de respuesta
-```json
-[
-  {
-    "lesson_id": 19,
-    "name_level": "Nivel 2",
-    "content": "Activity content",
-    "iterations": 1,
-    "min_time": 10,
-    "min_mistakes": 5,
-    "name": "Lesson name",
-    "teacher_name": "María Cordero",
-    "description": "Lesson description",
-    "lesson_code": "LEC001",
-    "assignment": "1",
-    "shared": "0"
-  }
-]
-```
 
 ### Obtener cantidad de lecciones públicas (Paginación)
 **Nombre:** get_lessons_public_count
 
-**Descripción:** Obtiene la cantidad de prácticas públicas en el sistema.
+**Descripción:** Obtiene la cantidad de prácticas públicas en el sistema. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
-Ninguno
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `get_lessons_public_count`: integer
 
@@ -1120,10 +1005,11 @@ Ninguno
 ### Obtener lecciones públicas (Páginación)
 **Nombre:** get_lessons_public_per_page
 
-**Descripción:** Obtiene las lecciones en grupos de 10 lecciones públicas
+**Descripción:** Obtiene las lecciones en grupos de 10 lecciones públicas. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
 - `var_page_number`: integer - Default 1
 - `var_page_size`: integer - Default 10
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `lesson_id`: integer
 - `level_id`: smallint
@@ -1158,52 +1044,12 @@ Ninguno
 ]
 ```
 
-### Obtener lecciones predeterminadas por código (Búsqueda)
-**Nombre:** get_lessons_default_by_code
-
-**Descripción:** Obtiene una lección pretederminada según el código de la lección. Dado que el código es único, debería retornar solo 1.
-#### Parámetros de entrada:
-- `var_lesson_code`: varchar(16)
-#### Parámetros de salida
-- `lesson_id`: integer
-- `level_id`: smallint
-- `content`: varchar(256)
-- `iterations`: smallint
-- `min_time`: smallint
-- `min_mistakes`: smallint
-- `name`: varchar(16)
-- `teacher_name`: varchar(64)
-- `description`: varchar(128)
-- `lesson_code`: varchar(16)
-- `assignment`: bit
-- `shared`: bit
-
-#### Ejemplo de respuesta
-```json
-[
-  {
-    "lesson_id": 3,
-    "name_level": "Nivel 1",
-    "content": "Ejercicios de dedos en la fila de inicio.",
-    "iterations": 12,
-    "min_time": 6,
-    "min_mistakes": 2,
-    "name": "Ejercicios de Inicio",
-    "teacher_name": "Elena Vargas",
-    "description": "Práctica los ejercicios de mecanografía con la fila de inicio.",
-    "lesson_code": "MEC3",
-    "assignment": "0",
-    "shared": "0"
-  }
-]
-```
-
 ### Obtener cantidad de lecciones pretederminadas (Páginación)
 **Nombre:** get_lessons_default_count
 
-**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación
+**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
-Ninguno
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `get_lessons_default_count`: integer
 #### Ejemplo de respuesta
@@ -1218,10 +1064,11 @@ Ninguno
 ### Obtener información de lecciones pretederminadas (Páginación)
 **Nombre:** get_lessons_default_per_page
 
-**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación
+**Descripción:** Obtiene la cantidad de lecciones predeterminadas en el sistema. Útil para paginación. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
 - `var_page_number`: integer - Default 1
 - `var_page_size`: integer - Default 10
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `get_lessons_default_count`: integer
 #### Ejemplo de respuesta
@@ -1260,13 +1107,14 @@ Ninguno
 
 
 ### Obtener lecciones privadas de profesor (Páginación)
-**Nombre:** get_lessons_private_by_teacher_pages
+**Nombre:** get_lessons_private_by_teacher_per_page
 
-**Descripción:** Obtiene las lecciones creadas por un profesor en particular, con paginación.
+**Descripción:** Obtiene las lecciones creadas por un profesor en particular, con paginación. Se acepta un nombre opcional para filtrar resultados.
 #### Parámetros de entrada:
 - `var_teacher_id`: integer
 - `var_page_number`: integer - Default 1
 - `var_page_size`: integer - Default 10
+- `var_name` VARCHAR(16) - Default NULL
 #### Parámetros de salida
 - `lesson_id`: integer
 - `level_id`: smallint
