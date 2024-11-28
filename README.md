@@ -607,24 +607,6 @@ Ninguno
 ]
 ```
 
-### Obtener la última lección (Estudiante)
-**Nombre:** get_last_lesson
-
-**Descripción:** Procedimiento que da la última lección de un estudiante 
-#### Parámetros de entrada:
-- `var_student_id`: integer
-#### Parámetros de salida
-- `get_last_lesson`: integer
-
-#### Ejemplo de respuesta
-```json
-[
-  {
-    "get_last_lesson": 3
-  }
-]
-```
-
 ### Obtener métricas del estudiante
 **Nombre:** get_lesson_metrics_student
 
@@ -713,6 +695,25 @@ Ninguno
 ]
 ```
 
+### Obtener cantidad de lecciones asignadas completadas y pendientes de un estudiante (Alternativo y sencillo)
+**Nombre:** get_student_pending_completed_lesson_count
+
+**Descripción:** Obtiene la cantidad de lecciones asignadas y completadas de un estudiante, sin importar el docente. Para obtener las pendientes, se resta las asignadas menos las completadas.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `total_assigned_lessons`: integer
+- `completed_lessons`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "total_assigned_lessons": 3,
+    "completed_lessons": 2
+  }
+]
+```
 
 ### Obtener cantidad de lecciones asignadas completadas y pendientes de un estudiante
 **Nombre:** get_lessons_count_pending_completed_student
@@ -781,7 +782,80 @@ Si el parámetro var_teacher_id es dado, contabiliza solo las tareas asignadas p
 ]
 ```
 
-### Obtener información siguiente tarea de estudiante
+### Obtener actividad reciente de estudiantes de un profesor
+**Nombre:** get_latest_student_activity
+
+**Descripción:** Obtiene información sobre las últimas tres métricas más recientes de los estudiantes de un profesor.
+#### Parámetros de entrada:
+- `var_teacher_id`: integer
+#### Parámetros de salida
+- `lesson_name`: integer
+- `student_name`: integer
+- `completion_date`: integer
+- `is_complete`: integer
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_name": "Lección 1",
+    "student_name": "Ana Torres",
+    "completion_date": "2024-11-27",
+    "is_complete": "1"
+  },
+  {
+    "lesson_name": "Lección 1",
+    "student_name": "Ana Torres",
+    "completion_date": "2024-11-27",
+    "is_complete": "1"
+  },
+  {
+    "lesson_name": "PruebaDos",
+    "student_name": "Ana Torres",
+    "completion_date": "2024-11-27",
+    "is_complete": "1"
+  }
+]
+```
+
+### Obtener siguiente actividad predeterminada de estudiante
+**Nombre:** get_lessons_next_default
+
+**Descripción:** Obtiene la información de la siguiente actividad preterminada más antigua de un estudiante. Esto significa que el estudiante la intentó y en ningún intento la ha aprobado o no la ha hecho.
+#### Parámetros de entrada:
+- `var_student_id`: integer
+#### Parámetros de salida
+- `lesson_id`: integer
+- `level_id`: smallint
+- `content`: varchar(256)
+- `iterations`: smallint
+- `min_time`: smallint
+- `min_mistakes`: smallint
+- `name`: varchar(16)
+- `teacher_name`: varchar(64)
+- `description`: varchar(128)
+- `lesson_code`: varchar(16)
+- `assignment`: bit
+- `shared`: bit
+
+#### Ejemplo de respuesta
+```json
+[
+  {
+    "lesson_id": 2,
+    "level_id": 1,
+    "content": "d k",
+    "iterations": 10,
+    "min_time": 420,
+    "min_mistakes": 5,
+    "lesson_name": "Lección 2",
+    "description": "Esta lección de mecanografía se enfoca en la secuencia \"d k d k\", permitiéndote fortalecer tu habilidad de escritura.",
+    "lesson_code": "MEC2"
+  }
+]
+```
+
+### Obtener siguiente tarea de estudiante
 **Nombre:** get_lessons_next_assignment
 
 **Descripción:** Obtiene la información de la siguiente tarea más antigua de un estudiante. Esto significa que el estudiante la intentó y en ningún intento la ha aprobado o no la ha hecho.
